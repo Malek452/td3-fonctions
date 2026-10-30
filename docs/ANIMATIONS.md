@@ -79,7 +79,7 @@ Introducing `x_1=(-b-\sqrt{\Delta})/(2a)` after computing a discriminant is a ne
 
 ## Timing contract
 
-`motion/timing.ts` defines one slot per step. `motion/step-clock.ts` schedules absolute boundaries so many sequential operations do not accumulate fractional-frame drift. `motion/player.ts` serializes seeks/replays. Direct jumps and backward navigation settle a step; forward adjacent navigation and replay run the authored transition. Speed changes affect playback without restarting the expression.
+`motion/timing.ts` defines one slot per step. `motion/step-clock.ts` schedules absolute boundaries so many sequential operations do not accumulate fractional-frame drift. `motion/player.ts` coordinates seeks/replays through `motion/playback-controller.ts`. A replay arms its end boundary only after the requested starting frame has actually rendered, so a stale frame from an asynchronous speed recalculation cannot stop it prematurely. Direct jumps and backward navigation settle a step; forward adjacent navigation and replay run the authored transition. Speed changes affect playback without restarting the expression.
 
 Do not shorten a slot, add an unbounded wait, or replace absolute scheduling without updating and running `tests/timing.test.ts`. Test long sequences at every supported speed, then inspect actual browser playback: passing geometry tests alone cannot establish a good visual explanation.
 

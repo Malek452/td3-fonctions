@@ -13,6 +13,7 @@ await build({
     'tests/interactions.test.tsx',
     'tests/animation.test.ts',
     'tests/operational.test.ts',
+    'tests/playback-controller.test.ts',
   ],
   bundle: true,
   splitting: true,
@@ -35,7 +36,7 @@ await build({
 });
 await writeFile(
   '.cache/tests/run.mjs',
-  "await import('./setup.js');\nawait import('./content.test.js');\nawait import('./mathematics.test.js');\nawait import('./td3-mathematics.test.js');\nawait import('./interactions.test.js');\nawait import('./animation.test.js');\nawait import('./operational.test.js');\nawait import('./timing.test.js');\nawait import('../../tests/scaffold.test.mjs');\n",
+  "await import('./setup.js');\nawait import('./content.test.js');\nawait import('./mathematics.test.js');\nawait import('./td3-mathematics.test.js');\nawait import('./interactions.test.js');\nawait import('./animation.test.js');\nawait import('./operational.test.js');\nawait import('./playback-controller.test.js');\nawait import('./timing.test.js');\nawait import('../../tests/scaffold.test.mjs');\n",
 );
 const child = spawn(
   process.execPath,

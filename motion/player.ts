@@ -3,6 +3,7 @@ import { Player, Stage, Vector2 } from '@motion-canvas/core';
 import project from './project?project';
 import type { Activity } from '../src/types';
 import { STEP_SECONDS as STEP, SETTLED_SECONDS } from './timing';
+import { createPlaybackController } from './playback-controller';
 const FPS = 30;
 export interface Controller {
   seek(step: number): void;
@@ -28,8 +29,12 @@ export function mount(
     0,
   );
   let disposed = false,
-    initialized = false,
-    stopAt = -1;
+    initialized = false;
+  const transport = createPlaybackController(player, {
+    fps: FPS,
+    stepSeconds: STEP,
+    settledSeconds: SETTLED_SECONDS,
+  });
   const unrender = player.onRender.subscribe(async () => {
     try {
       if (!disposed)
@@ -48,44 +53,32 @@ export function mount(
     }
   });
   const unframe = player.onFrameChanged.subscribe((frame) => {
-    if (stopAt >= 0 && frame >= stopAt) {
-      player.togglePlayback(false);
-      stopAt = -1;
-    }
+    host.dataset.frame = String(frame);
+    transport.onFrame(frame);
+  });
+  const unstate = player.onStateChanged.subscribe((state) => {
+    host.dataset.playbackState = state.paused ? 'paused' : 'playing';
   });
   const unlog = player.logger.onLogged.subscribe((payload) => {
     if (payload.level === 'error') onError(payload.message);
   });
   return {
-    seek(step) {
-      stopAt = -1;
-      player.togglePlayback(false);
-      player.requestSeek(Math.round((step * STEP + SETTLED_SECONDS) * FPS));
-    },
-    replay(step, speed) {
-      player.setSpeed(speed);
-      const begin = Math.max(0, step * STEP);
-      stopAt = Math.round((begin + SETTLED_SECONDS) * FPS);
-      // Playing from the end resets Motion Canvas to frame zero. Apply our
-      // explicit step seek afterwards so that reset cannot overwrite it.
-      player.togglePlayback(true);
-      player.requestSeek(Math.round(begin * FPS));
-    },
-    pause() {
-      player.togglePlayback(false);
-      stopAt = -1;
-    },
-    setSpeed(speed) {
-      player.setSpeed(speed);
-    },
+    seek: transport.seek,
+    replay: transport.replay,
+    pause: transport.pause,
+    setSpeed: transport.setSpeed,
     destroy() {
       disposed = true;
+      transport.destroy();
       player.deactivate();
       unrender();
       uncalc();
       unframe();
+      unstate();
       unlog();
       host.replaceChildren();
+      delete host.dataset.frame;
+      delete host.dataset.playbackState;
     },
   };
 }
