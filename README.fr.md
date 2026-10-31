@@ -6,7 +6,7 @@ Présentation interactive en français du TD no 3 de Mathématiques 1 (EC 101-1-
 
 ## Contenu
 
-Les 7 exercices et leurs 15 questions sont traités : propriétés des logarithmes, équations et inéquations logarithmiques, changement de variable avec l'exponentielle, tableaux de signes et trigonométrie. Chaque question comprend l'énoncé, les conditions d'existence, les transformations justifiées et la solution. Les rappels et les figures sont répartis dans le parcours.
+Les 7 exercices et leurs 15 questions sont traités : propriétés des logarithmes, équations et inéquations logarithmiques, changement de variable avec l'exponentielle, tableaux de signes et trigonométrie. Chaque résolution précise les conditions d'existence, le domaine de définition, les transformations justifiées et l'ensemble des solutions. Les rappels et les figures sont répartis dans le parcours.
 
 Le cours joint « Chapitre 3 – Limites et continuité » inspire les repères graphiques et les rappels de croissance de ln et exp. Son thème principal diffère du TD. Les courbes et les cercles ont été redessinés pour cette présentation ; ils ne sont pas des captures des pages du cours.
 
@@ -20,7 +20,7 @@ Le vocabulaire distingue les conditions d'existence, l'injectivité, la stricte 
 
 - Choisir un exercice puis une question dans les menus.
 - Avancer avec « Étape suivante », les flèches du clavier ou un glissement horizontal sur téléphone.
-- Le menu des étapes permet d'aller directement à un domaine, un calcul ou une conclusion.
+- Le menu des étapes permet d'aller directement à l'étude du domaine de définition, à un calcul ou à une conclusion.
 - Utiliser le ralenti, le rejeu ou la réduction des animations selon les besoins.
 - Le bouton plein écran facilite la projection. Le fond clair, les traits épais et les accents sombres améliorent la lecture.
 - Le corrigé imprimable est accessible à `handout/`. L'impression du navigateur permet de l'enregistrer en PDF.

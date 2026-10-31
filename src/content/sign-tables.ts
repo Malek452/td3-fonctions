@@ -46,7 +46,7 @@ export function signTableSteps(
     out.push({
       title:
         i === model.rows.length - 1
-          ? 'Compléter la ligne du résultat'
+          ? 'Déterminer le signe de l’expression étudiée'
           : `Compléter la ligne ${i + 1}`,
       tex: signTableTex(table),
       why: explanations[i],

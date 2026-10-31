@@ -83,7 +83,7 @@ it('states the complete exact solution sets and all imposed domains', () => {
     compact(activity('td3-5c').initialDomain ?? ''),
     compact(tex`\mathbb{R}\setminus\{1\}`),
   );
-  assert.equal(compact(activity('td3-7').initialDomain ?? ''), compact(tex`[0,2\pi]`));
+  assert.equal(compact(activity('td3-7').initialDomain ?? ''), compact(tex`[0;2\pi]`));
 });
 
 it('exercise 1 preserves the logarithmic values and the positive argument of ln(a)', () => {

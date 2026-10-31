@@ -38,11 +38,11 @@ export const logExercises: Exercise[] = [
       'Regrouper en un seul logarithme',
     ],
     prerequisites: ['Puissances', 'Fractions'],
-    description: 'Les règles du logarithme, puis les deux calculs de la feuille TD 3.',
+    description: 'Les propriétés du logarithme népérien, puis les deux calculs de la feuille TD 3.',
     activities: [
       {
         id: 'td3-rappels-ln',
-        label: 'Rappels · Les règles de ln',
+        label: 'Rappels · Propriétés de ln',
         prompt: 'Les propriétés utiles aux exercices 1 à 3.',
         tex: t`\ln(u)\quad\text{existe si }u>0`,
         result: t`\ln(uv)=\ln(u)+\ln(v)`,
@@ -52,28 +52,28 @@ export const logExercises: Exercise[] = [
           textStep(
             'La démarche de résolution',
             [
-              'Commencer par les conditions d’existence.',
-              'Transformer l’expression, puis vérifier que les solutions respectent ces conditions.',
+              'Déterminer les conditions d’existence, puis le domaine de définition.',
+              'Résoudre sur ce domaine, puis vérifier que les valeurs obtenues lui appartiennent.',
             ],
-            'Une transformation ne rétablit jamais une valeur interdite dans l’énoncé.',
+            'Une valeur interdite dans l’équation ou l’inéquation initiale ne peut pas être une solution.',
             'Méthode',
           ),
           s(
             'Condition d’existence',
             t`\ln(u)\quad\text{existe si }u>0`,
-            'Le logarithme népérien est défini sur les réels strictement positifs. En particulier, ln(0) et le logarithme d’un nombre négatif n’existent pas dans ℝ.',
+            'La fonction logarithme népérien est définie sur ]0 ; +∞[. Ainsi, ln(u) existe dans ℝ si et seulement si u > 0.',
             newPhase('Rappels'),
           ),
           s(
             'La courbe du logarithme',
             t`y=\ln(x),\quad x>0`,
-            'La fonction ln est strictement croissante sur ]0 ; +∞[. Sa courbe passe par (1 ; 0) et (e ; 1). Son ensemble de définition exclut 0 et les nombres négatifs.',
+            'La fonction ln est strictement croissante sur ]0 ; +∞[. Sa courbe passe par (1 ; 0) et (e ; 1). Son domaine de définition exclut 0 et les nombres négatifs.',
             { statement: true, graph: 'log' },
           ),
           s(
             'Logarithme d’un produit',
             t`\ln(uv)=\ln(u)+\ln(v)\quad(u,v>0)`,
-            'Pour deux facteurs strictement positifs, le logarithme transforme leur produit en somme. On peut lire cette identité dans les deux sens.',
+            'Pour deux facteurs strictement positifs, le logarithme de leur produit est la somme de leurs logarithmes. On peut lire cette identité dans les deux sens.',
             { statement: true },
           ),
           s(
@@ -91,7 +91,7 @@ export const logExercises: Exercise[] = [
           s(
             'Injectivité du logarithme',
             t`\ln(u)=\ln(v)\iff u=v\quad(u,v>0)`,
-            'La fonction ln est strictement croissante, donc injective. Deux nombres positifs ont le même logarithme exactement lorsqu’ils sont égaux.',
+            'La fonction ln est strictement croissante, donc injective. Deux nombres strictement positifs ont le même logarithme si et seulement s’ils sont égaux.',
             { statement: true },
           ),
           s(
@@ -104,7 +104,7 @@ export const logExercises: Exercise[] = [
             'Une erreur fréquente',
             [
               'La somme de deux logarithmes correspond au logarithme d’un produit.',
-              'Il n’existe pas de règle qui transforme ln(u + v) en ln(u) + ln(v).',
+              'En général, ln(u + v) n’est pas égal à ln(u) + ln(v).',
             ],
             'Par exemple, ln(1 + 1) = ln(2), alors que ln(1) + ln(1) = 0.',
             'Vigilance',
@@ -135,13 +135,13 @@ export const logExercises: Exercise[] = [
           s(
             'Premier logarithme',
             t`\ln(125)=\ln(5^3)`,
-            'On remplace 125 par 5³. C’est le même nombre positif.',
+            'On remplace 125 par 5³. C’est le même nombre strictement positif.',
             newPhase('Calculer chaque terme'),
           ),
           s(
             'Logarithme d’une puissance',
             t`\ln(125)=3\ln(5)`,
-            'La règle ln(uʳ) = r ln(u) s’applique avec u = 5 > 0 et r = 3.',
+            'La propriété ln(uʳ) = r ln(u) s’applique avec u = 5 > 0 et r = 3.',
             {
               fromFocus: t`\ln(5^3)`, focus: t`3\ln(5)`,
               simplify: { source: t`\ln(5^3)`, result: t`3\ln(5)`, rule: 'Logarithme d’une puissance', condition: '5>0' },
@@ -186,7 +186,7 @@ export const logExercises: Exercise[] = [
           s(
             'Exposant négatif',
             t`\ln\!\left(\frac1{25}\right)=-2\ln(5)`,
-            'La règle sur les puissances reste valable pour l’exposant négatif −2.',
+            'La propriété du logarithme d’une puissance reste valable pour l’exposant négatif −2.',
             {
               fromFocus: t`\ln(5^{-2})`, focus: t`-2\ln(5)`,
               simplify: { source: t`\ln(5^{-2})`, result: t`-2\ln(5)`, rule: 'Logarithme d’une puissance', condition: '5>0' },
@@ -195,7 +195,7 @@ export const logExercises: Exercise[] = [
           s(
             'Logarithme de la racine',
             t`\ln(\sqrt5)=\frac12\ln(5)`,
-            'La racine carrée est la puissance d’exposant 1/2 de la base positive 5.',
+            'La racine carrée est la puissance d’exposant 1/2 de la base strictement positive 5.',
             { statement: true },
           ),
           s(
@@ -266,7 +266,7 @@ export const logExercises: Exercise[] = [
           s(
             'Coefficient transformé en exposant',
             t`-\ln(3)+\ln(2^4)-\ln(5)=\ln(a)`,
-            'Puisque 2 > 0, la règle 4 ln(2) = ln(2⁴) permet de regrouper ensuite les logarithmes.',
+            'Puisque 2 > 0, la propriété 4 ln(2) = ln(2⁴) permet de regrouper ensuite les logarithmes.',
             {
               phase: 'Regrouper les logarithmes', fromFocus: t`4\ln(2)`, focus: t`\ln(2^4)`,
               simplify: { source: t`4\ln(2)`, result: t`\ln(2^4)`, rule: 'Logarithme d’une puissance', condition: '2>0' },
@@ -294,7 +294,7 @@ export const logExercises: Exercise[] = [
           s(
             'Deuxième quotient',
             t`\ln\!\left(\frac{\frac{16}{3}}{5}\right)=\ln(a)`,
-            'Les nombres 16/3 et 5 sont positifs. On applique une seconde fois la propriété du logarithme d’un quotient.',
+            'Les nombres 16/3 et 5 sont strictement positifs. On applique une seconde fois la propriété du logarithme d’un quotient.',
             {
               fromFocus: t`\ln\!\left(\frac{16}{3}\right)-\ln(5)`, focus: t`\ln\!\left(\frac{\frac{16}{3}}{5}\right)`,
               simplify: { source: t`\ln\!\left(\frac{16}{3}\right)-\ln(5)`, result: t`\ln\!\left(\frac{\frac{16}{3}}{5}\right)`, rule: 'Logarithme d’un quotient', condition: t`\frac{16}{3}>0,\ 5>0` },
@@ -303,7 +303,7 @@ export const logExercises: Exercise[] = [
           s(
             'Simplifier le quotient de fractions',
             t`\ln\!\left(\frac{16}{3\times5}\right)=\ln(a)`,
-            'Diviser 16/3 par 5 revient à diviser 16 par 3 × 5. Tous les arguments restent positifs.',
+            'Diviser 16/3 par 5 revient à diviser 16 par 3 × 5. Tous les arguments restent strictement positifs.',
             {
               fromFocus: t`\frac{\frac{16}{3}}{5}`, focus: t`\frac{16}{3\times5}`,
               simplify: { source: t`\frac{\frac{16}{3}}{5}`, result: t`\frac{16}{3\times5}`, rule: 'Diviser par 5, c’est multiplier par 1/5', condition: t`3\ne0,\ 5\ne0` },
@@ -325,7 +325,7 @@ export const logExercises: Exercise[] = [
             { phase: 'Conclusion' },
           ),
           s(
-            'Vérification de la condition',
+            'Vérification de la condition d’existence',
             t`\frac{16}{15}>0`,
             'La valeur obtenue respecte bien la condition a > 0. Elle est l’unique solution.',
             { statement: true },
@@ -333,7 +333,7 @@ export const logExercises: Exercise[] = [
           s(
             'Valeur admissible de a',
             t`a=\frac{16}{15}`,
-            'Ce nombre positif est l’unique réel dont le logarithme est égal à l’expression de départ.',
+            'Ce nombre strictement positif est l’unique réel dont le logarithme est égal à l’expression de départ.',
             { statement: true },
           ),
         ],
@@ -349,7 +349,7 @@ export const logExercises: Exercise[] = [
     minutes: 25,
     color: 'blue',
     objectives: [
-      'Déterminer le domaine d’une équation',
+      'Déterminer le domaine de définition d’une équation',
       'Utiliser l’injectivité de ln',
       'Contrôler les solutions obtenues',
     ],
@@ -359,8 +359,8 @@ export const logExercises: Exercise[] = [
     activities: [
       {
         id: 'td3-2a',
-        label: '2a · Une équation du premier degré',
-        prompt: 'Résoudre après avoir cherché l’ensemble de définition.',
+        label: '2a · Se ramener au premier degré',
+        prompt: 'Déterminer le domaine de définition, puis résoudre.',
         tex: t`\ln(1-2x)=\ln(x+2)+\ln(3)`,
         result: t`S=\{-1\}`,
         initialDomain: t`D=]-2;\frac12[`,
@@ -369,19 +369,19 @@ export const logExercises: Exercise[] = [
           s(
             'Énoncé',
             t`\ln(1-2x)=\ln(x+2)+\ln(3)`,
-            'Un réel x est solution seulement si les deux membres existent et sont égaux.',
+            'Un réel x est solution si et seulement si les deux membres sont définis et égaux.',
             newPhase('Énoncé'),
           ),
           s(
             'Arguments strictement positifs',
             t`1-2x>0\quad\text{et}\quad x+2>0`,
-            'Chaque argument d’un logarithme doit être > 0. L’argument constant 3 est déjà strictement positif.',
-            newPhase('Domaine'),
+            'Chaque argument d’un logarithme doit être strictement positif. L’argument constant 3 est déjà strictement positif.',
+            newPhase('Domaine de définition'),
           ),
           s(
             'Première condition',
             t`1-2x>0`,
-            'On résout d’abord la condition d’existence de ln(1 − 2x).',
+            'On résout l’inéquation qui traduit la condition d’existence de ln(1 − 2x).',
             { statement: true },
           ),
           s(
@@ -394,7 +394,7 @@ export const logExercises: Exercise[] = [
             },
           ),
           s(
-            'Division par un nombre négatif',
+            'Diviser par −2',
             t`x<\frac12`,
             'On divise les deux membres par −2 < 0. Le sens de l’inégalité est inversé, puis les deux quotients sont simplifiés.',
             {
@@ -402,7 +402,7 @@ export const logExercises: Exercise[] = [
               balance: { operation: 'divide', operand: '-2', left: '-2x', right: '-1', relation: '>', toLeft: 'x', toRight: t`\frac12`, condition: '-2<0', sign: 'negative' },
             },
           ),
-          s('Seconde condition', t`x+2>0`, 'On résout maintenant la condition d’existence de ln(x + 2).', {
+          s('Seconde condition', t`x+2>0`, 'On résout l’inéquation qui traduit la condition d’existence de ln(x + 2).', {
             statement: true,
           }),
           s('Soustraire 2 aux deux membres', t`x>-2`, 'La même soustraction dans chaque membre conserve le sens de l’inégalité.', {
@@ -410,13 +410,13 @@ export const logExercises: Exercise[] = [
             balance: { operation: 'subtract', operand: '2', left: 'x+2', right: '0', relation: '>', toLeft: 'x', toRight: '-2' },
           }),
           s(
-            'Intersection des conditions',
+            'Domaine de définition',
             t`D=]-2;\frac12[`,
             'Il faut simultanément x > −2 et x < 1/2. Les bornes sont exclues car un argument serait nul.',
             { statement: true },
           ),
           s(
-            'Équation sur le domaine',
+            'Équation sur le domaine de définition',
             t`\ln(1-2x)=\ln(x+2)+\ln(3)`,
             'Toutes les transformations suivantes sont effectuées pour x dans D.',
             newPhase('Résolution sur D'),
@@ -424,12 +424,12 @@ export const logExercises: Exercise[] = [
           s(
             'Somme transformée en logarithme',
             t`\ln(1-2x)=\ln\!\bigl(3(x+2)\bigr)`,
-            'Sur D, x + 2 > 0 et 3 > 0. La somme des deux logarithmes est le logarithme de leur produit.',
+            'Sur D, x + 2 > 0 et 3 > 0. La somme des deux logarithmes est le logarithme du produit de leurs arguments.',
           ),
           s(
             'Égalité des arguments',
             t`1-2x=3(x+2)`,
-            'Les deux arguments sont positifs sur D. L’injectivité de ln donne une équivalence.',
+            'Les deux arguments sont strictement positifs sur D. L’injectivité de ln donne une équivalence.',
           ),
           s(
             'Distributivité de la multiplication',
@@ -472,7 +472,7 @@ export const logExercises: Exercise[] = [
           s(
             'Soustraire 1 aux deux membres',
             t`-5x=5`,
-            'On soustrait 1 dans chaque membre : 6 − 1 = 5.',
+            'On soustrait 1 aux deux membres : 6 − 1 = 5.',
             {
               fromFocus: '1-5x=6', focus: '-5x=5',
               balance: { operation: 'subtract', operand: '1', left: '1-5x', right: '6', relation: '=', toLeft: '-5x', toRight: '5' },
@@ -488,7 +488,7 @@ export const logExercises: Exercise[] = [
             },
           ),
           s(
-            'Appartenance au domaine',
+            'Appartenance au domaine de définition',
             t`-2<-1<\frac12`,
             'La valeur −1 respecte les deux conditions d’existence.',
             newPhase('Contrôle'),
@@ -502,7 +502,7 @@ export const logExercises: Exercise[] = [
           s(
             'Ensemble des solutions',
             t`S=\{-1\}`,
-            'Les transformations étaient équivalentes sur D et la valeur obtenue appartient à D.',
+            'Les équations successives sont équivalentes sur D, et la valeur obtenue appartient à D.',
             newPhase('Conclusion'),
           ),
         ],
@@ -510,7 +510,7 @@ export const logExercises: Exercise[] = [
       {
         id: 'td3-2b',
         label: '2b · Racine carrée et logarithmes',
-        prompt: 'Résoudre après avoir cherché l’ensemble de définition.',
+        prompt: 'Déterminer le domaine de définition, puis résoudre.',
         tex: t`\ln\!\left(\sqrt{2x-2}\right)=\ln(4-x)-\frac12\ln(x)`,
         result: t`S=\{2\}`,
         initialDomain: t`D=]1;4[`,
@@ -523,15 +523,15 @@ export const logExercises: Exercise[] = [
             newPhase('Énoncé'),
           ),
           s(
-            'Conditions sur les trois logarithmes',
+            'Conditions d’existence des logarithmes',
             t`\sqrt{2x-2}>0,\quad4-x>0,\quad x>0`,
-            'Les arguments des logarithmes doivent être strictement positifs. La racine elle-même doit donc être > 0, et pas seulement définie.',
-            newPhase('Domaine'),
+            'Les arguments des logarithmes doivent être strictement positifs. La racine carrée doit donc être strictement positive.',
+            newPhase('Domaine de définition'),
           ),
           s(
-            'Condition issue de la racine',
+            'Racine carrée strictement positive',
             t`2x-2>0`,
-            'Une racine carrée est strictement positive exactement lorsque son radicand est strictement positif.',
+            'Une racine carrée est strictement positive si et seulement si son radicande, le nombre sous le radical, est strictement positif.',
             { statement: true },
           ),
           s('Ajouter 2 aux deux membres', t`2x>2`, 'L’addition du même réel aux deux membres conserve le sens de l’inégalité.', {
@@ -541,16 +541,16 @@ export const logExercises: Exercise[] = [
           s(
             'Diviser par 2',
             t`x>1`,
-            'On divise par 2 > 0, sans inverser le sens. Cette condition implique déjà x > 0.',
+            'On divise les deux membres par 2 > 0 en conservant le sens de l’inégalité. Cette condition implique déjà x > 0.',
             {
               fromFocus: '2x>2', focus: 'x>1',
               balance: { operation: 'divide', operand: '2', left: '2x', right: '2', relation: '>', toLeft: 'x', toRight: '1', condition: '2>0', sign: 'positive' },
             },
           ),
           s(
-            'Condition issue de ln(4 − x)',
+            'Condition d’existence de ln(4 − x)',
             t`4-x>0`,
-            'On résout la condition de stricte positivité de l’argument 4 − x.',
+            'On résout l’inéquation 4 − x > 0, qui traduit la condition d’existence de ln(4 − x).',
             { statement: true },
           ),
           s(
@@ -563,7 +563,7 @@ export const logExercises: Exercise[] = [
             },
           ),
           s(
-            'Intersection des conditions',
+            'Domaine de définition',
             t`D=]1;4[`,
             'Les trois conditions se réduisent à 1 < x < 4. En x = 1, le logarithme de la racine serait ln(0).',
             { statement: true },
@@ -588,7 +588,7 @@ export const logExercises: Exercise[] = [
           s(
             'Injectivité de ln',
             t`\sqrt{2x-2}=\frac{4-x}{\sqrt x}`,
-            'Les deux arguments sont positifs. L’égalité de leurs logarithmes équivaut à leur égalité.',
+            'Les deux arguments sont strictement positifs. L’égalité de leurs logarithmes équivaut à leur égalité.',
           ),
           s(
             'Élévation au carré',
@@ -647,27 +647,27 @@ export const logExercises: Exercise[] = [
             simplify: { source: t`2\times4\times x`, result: '8x', rule: 'Calcul du coefficient du monôme' },
           }),
           s(
-            'Soustraire x²',
+            'Soustraire x² aux deux membres',
             t`x^2-2x=16-8x`,
-            'On soustrait x² dans les deux membres. À gauche, 2x² − x² = x².',
+            'On soustrait x² aux deux membres. Dans le membre de gauche, 2x² − x² = x².',
             {
               fromFocus: '2x^2-2x=16-8x+x^2', focus: 'x^2-2x=16-8x',
               balance: { operation: 'subtract', operand: 'x^2', left: '2x^2-2x', right: '16-8x+x^2', relation: '=', toLeft: 'x^2-2x', toRight: '16-8x' },
             },
           ),
           s(
-            'Ajouter 8x',
+            'Ajouter 8x aux deux membres',
             t`x^2+6x=16`,
-            'On ajoute 8x dans les deux membres. À gauche, −2x + 8x = 6x.',
+            'On ajoute 8x aux deux membres. Dans le membre de gauche, −2x + 8x = 6x.',
             {
               fromFocus: 'x^2-2x=16-8x', focus: 'x^2+6x=16',
               balance: { operation: 'add', operand: '8x', left: 'x^2-2x', right: '16-8x', relation: '=', toLeft: 'x^2+6x', toRight: '16' },
             },
           ),
           s(
-            'Soustraire 16',
+            'Soustraire 16 aux deux membres',
             t`x^2+6x-16=0`,
-            'On obtient une équation du second degré en soustrayant 16.',
+            'On soustrait 16 aux deux membres pour obtenir une équation du second degré dont le membre de droite est nul.',
             {
               fromFocus: 'x^2+6x=16', focus: 'x^2+6x-16=0',
               balance: { operation: 'subtract', operand: '16', left: 'x^2+6x', right: '16', relation: '=', toLeft: 'x^2+6x-16', toRight: '0' },
@@ -718,9 +718,9 @@ export const logExercises: Exercise[] = [
             },
           ),
           s(
-            'Contrôle d’admissibilité des racines',
+            'Vérification des conditions d’existence',
             t`2\in]1;4[,\qquad-8\notin]1;4[`,
-            'La racine −8 n’appartient pas au domaine de l’équation initiale. La racine 2 satisfait toutes les conditions d’existence.',
+            'La racine −8 n’appartient pas au domaine de définition de l’équation initiale. La racine 2 satisfait toutes les conditions d’existence.',
             newPhase('Contrôle'),
           ),
           s(
@@ -732,7 +732,7 @@ export const logExercises: Exercise[] = [
           s(
             'Ensemble des solutions',
             t`S=\{2\}`,
-            'La seule solution admissible est 2. Sur le domaine initial, l’élévation au carré était réversible puisque les deux membres étaient positifs.',
+            'Le réel 2 est la seule solution de l’équation initiale. Sur D, l’élévation au carré donnait une équivalence puisque les deux membres étaient strictement positifs.',
             newPhase('Conclusion'),
           ),
         ],
@@ -750,7 +750,7 @@ export const logExercises: Exercise[] = [
     objectives: [
       'Utiliser la stricte croissance de ln',
       'Lire un tableau de signes',
-      'Intersecter avec le domaine initial',
+      'Prendre l’intersection avec le domaine de définition',
     ],
     prerequisites: ['Intervalles', 'Factorisation', 'Signe d’un produit'],
     description:
@@ -759,7 +759,7 @@ export const logExercises: Exercise[] = [
       {
         id: 'td3-3a',
         label: '3a · Un produit et son signe',
-        prompt: 'Résoudre après avoir cherché l’ensemble de définition.',
+        prompt: 'Déterminer le domaine de définition, puis résoudre.',
         tex: t`\ln(3x+2)\ge\ln\!\left(x^2+\frac14\right)`,
         result: t`S=[-\frac12;\frac72]`,
         initialDomain: t`D=]-\frac23;+\infty[`,
@@ -775,10 +775,10 @@ export const logExercises: Exercise[] = [
             'Conditions d’existence',
             t`3x+2>0\quad\text{et}\quad x^2+\frac14>0`,
             'Chaque argument doit être strictement positif.',
-            newPhase('Domaine'),
+            newPhase('Domaine de définition'),
           ),
           s(
-            'Le second argument est toujours positif',
+            'Le second argument est strictement positif',
             t`x^2+\frac14\ge\frac14>0`,
             'Pour tout réel x, x² ≥ 0. Ajouter 1/4 donne un nombre strictement positif.',
             { statement: true },
@@ -786,7 +786,7 @@ export const logExercises: Exercise[] = [
           s(
             'Condition sur le premier argument',
             t`3x+2>0`,
-            'Il reste à résoudre la condition de stricte positivité de 3x + 2.',
+            'Il reste à résoudre l’inéquation 3x + 2 > 0, qui traduit la condition d’existence de ln(3x + 2).',
             { statement: true },
           ),
           s(
@@ -801,7 +801,7 @@ export const logExercises: Exercise[] = [
           s(
             'Diviser par 3',
             t`x>-\frac23`,
-            'Le diviseur 3 est positif. Le sens de l’inégalité est conservé.',
+            'Le diviseur 3 est strictement positif. Le sens de l’inégalité est conservé.',
             {
               fromFocus: '3x>-2', focus: t`x>-\frac23`,
               balance: { operation: 'divide', operand: '3', left: '3x', right: '-2', relation: '>', toLeft: 'x', toRight: t`-\frac23`, condition: '3>0', sign: 'positive' },
@@ -810,19 +810,19 @@ export const logExercises: Exercise[] = [
           s(
             'Domaine de définition',
             t`D=]-\frac23;+\infty[`,
-            'Seule la condition x > −2/3 limite le domaine.',
+            'Les conditions d’existence sont satisfaites si et seulement si x > −2/3.',
             { statement: true },
           ),
           s(
             'Comparaison des arguments',
             t`3x+2\ge x^2+\frac14`,
-            'Sur D, les deux arguments sont positifs. La stricte croissance de ln conserve le sens de l’inégalité et donne une équivalence.',
+            'Sur D, les deux arguments sont strictement positifs. La stricte croissance de ln conserve le sens de l’inégalité et donne une équivalence.',
             newPhase('Résolution sur D'),
           ),
           s(
             'Soustraire 3x + 2 aux deux membres',
             t`0\ge x^2-3x+\frac14-2`,
-            'On soustrait 3x + 2 dans les deux membres.',
+            'On soustrait 3x + 2 aux deux membres.',
             {
               fromFocus: t`3x+2\ge x^2+\frac14`, focus: t`0\ge x^2-3x+\frac14-2`,
               balance: { operation: 'subtract', operand: '3x+2', left: '3x+2', right: t`x^2+\frac14`, relation: t`\ge`, toLeft: '0', toRight: t`x^2-3x+\frac14-2` },
@@ -849,7 +849,7 @@ export const logExercises: Exercise[] = [
           s(
             'Forme usuelle',
             t`x^2-3x-\frac74\le0`,
-            'On échange l’ordre des deux membres. C’est la même comparaison.',
+            'On permute les deux membres et on remplace le symbole ≥ par ≤ : l’inégalité reste équivalente.',
           ),
           s(
             'Discriminant du trinôme',
@@ -882,7 +882,7 @@ export const logExercises: Exercise[] = [
           s(
             'Racine carrée du discriminant',
             t`\sqrt\Delta=4`,
-            '4 est positif et 4² = 16. Le trinôme possède deux racines réelles distinctes.',
+            '4 est strictement positif et 4² = 16. Le trinôme possède deux racines réelles distinctes.',
             { statement: true },
           ),
           s(
@@ -902,7 +902,7 @@ export const logExercises: Exercise[] = [
             'Dans la première fraction, le numérateur vaut 3 − 4 = −1. Le dénominateur reste égal à 2.',
             {
               fromFocus: t`\frac{3-4}{2}`, focus: t`-\frac12`,
-              simplify: { source: t`\frac{3-4}{2}`, result: t`-\frac12`, rule: 'Calcul du numérateur de la première racine' },
+              simplify: { source: t`\frac{3-4}{2}`, result: t`-\frac12`, rule: 'Calcul du numérateur' },
             },
           ),
           s(
@@ -911,7 +911,7 @@ export const logExercises: Exercise[] = [
             'Dans la seconde fraction, le numérateur vaut 3 + 4 = 7. Le dénominateur reste égal à 2.',
             {
               fromFocus: t`\frac{3+4}{2}`, focus: t`\frac72`,
-              simplify: { source: t`\frac{3+4}{2}`, result: t`\frac72`, rule: 'Calcul du numérateur de la seconde racine' },
+              simplify: { source: t`\frac{3+4}{2}`, result: t`\frac72`, rule: 'Calcul du numérateur' },
             },
           ),
           s(
@@ -921,38 +921,38 @@ export const logExercises: Exercise[] = [
             newPhase('Étudier les signes'),
           ),
           s(
-            'Inéquation à lire dans le tableau',
+            'Inéquation produit',
             t`(x+\frac12)(x-\frac72)\le0`,
-            'On cherche les valeurs où ce produit est négatif ou nul. Le domaine D sera imposé à la fin.',
+            'On cherche les réels x pour lesquels ce produit est négatif ou nul, puis on ne retient que ceux qui appartiennent à D.',
             { statement: true },
           ),
           ...signTableSteps(
             signs3a,
             [
-              'x + 1/2 est négatif avant −1/2, nul en −1/2, puis positif. Le coefficient de x est positif.',
-              'x − 7/2 est négatif avant 7/2, nul en 7/2, puis positif. Le coefficient de x est positif.',
-              'Le produit est négatif lorsque les deux facteurs ont des signes contraires. Il est nul aux deux racines.',
+              'x + 1/2 est strictement négatif pour x < −1/2, nul pour x = −1/2 et strictement positif pour x > −1/2.',
+              'x − 7/2 est strictement négatif pour x < 7/2, nul pour x = 7/2 et strictement positif pour x > 7/2.',
+              'Le produit est strictement négatif lorsque ses deux facteurs sont non nuls et de signes contraires. Il est nul aux deux racines.',
             ],
             [1],
             [0, 1],
-            'On conserve la zone de signe − entre les deux racines, ainsi que les deux zéros puisque l’inégalité est large.',
+            'On retient l’intervalle où le produit est strictement négatif ainsi que les deux racines, puisque l’inégalité est large.',
           ),
           s(
-            'Solutions du produit',
+            'Solutions de l’inéquation produit',
             t`x\in[-\frac12;\frac72]`,
             'Le produit est négatif ou nul entre les racines, bornes comprises.',
             { statement: true },
           ),
           s(
-            'Intersection avec le domaine',
+            'Intersection avec le domaine de définition',
             t`[-\frac12;\frac72]\cap]-\frac23;+\infty[=[-\frac12;\frac72]`,
-            'Comme −1/2 > −2/3, tout l’intervalle obtenu appartient au domaine initial.',
-            newPhase('Contrôle du domaine'),
+            'Comme −1/2 > −2/3, l’intervalle obtenu est inclus dans le domaine de définition.',
+            newPhase('Restriction au domaine de définition'),
           ),
           s(
             'Ensemble des solutions',
             t`S=[-\frac12;\frac72]`,
-            'Les deux bornes sont admises : elles donnent l’égalité des arguments, et leurs logarithmes existent.',
+            'Les deux bornes appartiennent à l’ensemble des solutions : elles vérifient l’égalité des arguments et les conditions d’existence.',
             newPhase('Conclusion'),
           ),
         ],
@@ -960,7 +960,7 @@ export const logExercises: Exercise[] = [
       {
         id: 'td3-3b',
         label: '3b · Ne pas oublier la borne interdite',
-        prompt: 'Résoudre après avoir cherché l’ensemble de définition.',
+        prompt: 'Déterminer le domaine de définition, puis résoudre.',
         tex: t`\ln(2-x)\le\ln(2x+1)-\ln(3)`,
         result: t`S=[1;2[`,
         initialDomain: t`D=]-\frac12;2[`,
@@ -969,19 +969,19 @@ export const logExercises: Exercise[] = [
           s(
             'Énoncé',
             t`\ln(2-x)\le\ln(2x+1)-\ln(3)`,
-            'On cherche les réels admissibles qui vérifient cette comparaison de logarithmes.',
+            'On cherche les réels du domaine de définition qui vérifient cette inéquation.',
             newPhase('Énoncé'),
           ),
           s(
             'Conditions d’existence',
             t`2-x>0\quad\text{et}\quad2x+1>0`,
-            'Les deux arguments dépendant de x doivent être strictement positifs. L’argument constant 3 est positif.',
-            newPhase('Domaine'),
+            'Les deux arguments dépendant de x doivent être strictement positifs. L’argument constant 3 est strictement positif.',
+            newPhase('Domaine de définition'),
           ),
           s(
             'Première condition',
             t`2-x>0`,
-            'On résout d’abord la condition d’existence du logarithme de 2 − x.',
+            'On résout l’inéquation qui traduit la condition d’existence de ln(2 − x).',
             { statement: true },
           ),
           s(
@@ -993,7 +993,7 @@ export const logExercises: Exercise[] = [
               balance: { operation: 'add', operand: 'x', left: '2-x', right: '0', relation: '>', toLeft: '2', toRight: 'x' },
             },
           ),
-          s('Seconde condition', t`2x+1>0`, 'On résout ensuite la condition d’existence du logarithme de 2x + 1.', {
+          s('Seconde condition', t`2x+1>0`, 'On résout l’inéquation qui traduit la condition d’existence de ln(2x + 1).', {
             statement: true,
           }),
           s(
@@ -1008,14 +1008,14 @@ export const logExercises: Exercise[] = [
           s(
             'Diviser par 2',
             t`x>-\frac12`,
-            'Le diviseur 2 est positif. Le sens de l’inégalité est conservé.',
+            'Le diviseur 2 est strictement positif. Le sens de l’inégalité est conservé.',
             {
               fromFocus: '2x>-1', focus: t`x>-\frac12`,
               balance: { operation: 'divide', operand: '2', left: '2x', right: '-1', relation: '>', toLeft: 'x', toRight: t`-\frac12`, condition: '2>0', sign: 'positive' },
             },
           ),
           s(
-            'Intersection des conditions',
+            'Domaine de définition',
             t`D=]-\frac12;2[`,
             'Les deux conditions doivent être satisfaites simultanément. Les deux bornes sont exclues.',
             { statement: true },
@@ -1029,12 +1029,12 @@ export const logExercises: Exercise[] = [
           s(
             'Stricte croissance de ln',
             t`2-x\le\frac{2x+1}{3}`,
-            'Les deux arguments sont positifs sur D. La croissance de ln conserve le sens de la comparaison.',
+            'Les deux arguments sont strictement positifs sur D. La stricte croissance de ln donne une inéquation équivalente, de même sens.',
           ),
           s(
             'Multiplication par 3',
             t`3(2-x)\le2x+1`,
-            'Le nombre 3 est strictement positif. On multiplie les deux membres par 3 sans inverser le sens.',
+            'Le nombre 3 est strictement positif. On multiplie les deux membres par 3 en conservant le sens de l’inégalité.',
             {
               fromFocus: t`2-x\le\frac{2x+1}{3}`, focus: t`3(2-x)\le2x+1`,
               balance: { operation: 'multiply', operand: '3', left: '2-x', right: t`\frac{2x+1}{3}`, relation: t`\le`, toLeft: '3(2-x)', toRight: '2x+1', condition: '3>0', sign: 'positive' },
@@ -1062,7 +1062,7 @@ export const logExercises: Exercise[] = [
           s(
             'Ajouter 3x aux deux membres',
             t`6\le5x+1`,
-            'Le même ajout conserve l’inégalité. À droite, 2x + 3x = 5x.',
+            'Ajouter 3x aux deux membres conserve le sens de l’inégalité. Dans le membre de droite, 2x + 3x = 5x.',
             {
               fromFocus: t`6-3x\le2x+1`, focus: t`6\le5x+1`,
               balance: { operation: 'add', operand: '3x', left: '6-3x', right: '2x+1', relation: t`\le`, toLeft: '6', toRight: '5x+1' },
@@ -1082,10 +1082,10 @@ export const logExercises: Exercise[] = [
             },
           ),
           s(
-            'Intersection avec le domaine',
+            'Intersection avec le domaine de définition',
             t`[1;+\infty[\cap]-\frac12;2[=[1;2[`,
             'La résolution donne x ≥ 1, mais l’énoncé exige aussi x < 2.',
-            newPhase('Contrôle du domaine'),
+            newPhase('Restriction au domaine de définition'),
           ),
           s(
             'Borne 1 admise',

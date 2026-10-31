@@ -31,23 +31,23 @@ export const expTrigExercises: Exercise[] = [
     level: 'Mathématiques 1',
     minutes: 18,
     description:
-      'Une substitution transforme les équations exponentielles en équations du second degré.',
+      'Un changement de variable transforme les équations exponentielles en équations du second degré.',
     objectives: [
       'Poser t = eˣ avec t > 0',
-      'Écarter une racine incompatible',
+      'Écarter les racines qui ne vérifient pas t > 0',
       'Revenir à la variable x',
     ],
     prerequisites: [
-      'Règles de calcul des exponentielles',
-      'Produit nul',
-      'Fonctions réciproques exp et ln',
+      'Propriétés de la fonction exponentielle',
+      'Propriété du produit nul',
+      'Fonctions exponentielle et logarithme népérien',
     ],
     color: 'sage',
     activities: [
       {
         id: 'td3-4-rappel',
         label: 'Méthode · Le changement de variable',
-        prompt: 'Relier exponentielle et logarithme.',
+        prompt: 'Relier les fonctions exponentielle et logarithme népérien.',
         tex: t`t=e^x>0`,
         result: t`e^x=t\iff x=\ln(t)\quad(t>0)`,
         visual: 'substitution',
@@ -56,14 +56,14 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Une exponentielle strictement positive',
             t`e^x>0\qquad(x\in\mathbb R)`,
-            'La courbe reste au-dessus de l’axe horizontal. L’exponentielle est définie pour tout réel, est strictement positive et strictement croissante.',
+            'La courbe est située au-dessus de l’axe des abscisses. La fonction exponentielle est définie, strictement positive et strictement croissante sur ℝ.',
             { phase: 'Rappel', statement: true, graph: 'exp' },
           ),
           step(
-            'Une substitution utile',
+            'Le changement de variable t = eˣ',
             t`t=e^x\quad\Longrightarrow\quad t>0`,
-            'Quand une équation contient eˣ et e²ˣ, une seule nouvelle variable permet de retrouver un polynôme.',
-            { phase: 'Substitution', statement: true },
+            'Lorsque l’équation contient eˣ et e²ˣ, poser t = eˣ permet d’obtenir une équation polynomiale en t.',
+            { phase: 'Changement de variable', statement: true },
           ),
           step(
             'Le double de l’exposant',
@@ -74,13 +74,13 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’opposé de l’exposant',
             t`e^{-x}=\frac1{e^x}=\frac1t`,
-            'La règle e⁻ᵃ = 1/eᵃ donne un inverse. Elle ne donne pas l’opposé −eˣ.',
+            'L’identité e⁻ˣ = 1/eˣ donne l’inverse de eˣ. L’inverse et l’opposé −eˣ sont distincts.',
             { statement: true },
           ),
           step(
             'Le retour à x',
             t`e^x=t\iff x=\ln(t)\qquad(t>0)`,
-            'Le logarithme est la fonction réciproque de l’exponentielle. Une valeur de t négative ou nulle ne correspond à aucun réel x.',
+            'La fonction logarithme népérien est la réciproque de la fonction exponentielle. Une valeur de t négative ou nulle ne correspond à aucun réel x.',
             { phase: 'Retour à x', statement: true },
           ),
         ],
@@ -97,14 +97,14 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’équation à résoudre',
             t`2e^{2x}-5e^x=-2`,
-            'Les exponentielles existent pour tout réel x. Le domaine est donc ℝ.',
+            'Les deux membres de l’équation sont définis pour tout réel x. Le domaine de définition est donc ℝ.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
             'Le changement de variable',
             t`t=e^x>0\qquad e^{2x}=t^2`,
             'On remplace eˣ par t. On conserve la condition t > 0 pendant toute la résolution.',
-            { phase: 'Substitution', statement: true },
+            { phase: 'Changement de variable', statement: true },
           ),
           step(
             'L’équation en t',
@@ -131,7 +131,7 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'La décomposition du terme central',
+            'La décomposition du terme du premier degré',
             t`2t^2-4t-t+2=0`,
             'On écrit −5t = −4t − t. Ce choix permet de faire apparaître deux fois le facteur t − 2.',
             {
@@ -155,14 +155,14 @@ export const expTrigExercises: Exercise[] = [
               simplify: {
                 source: '2t^2-4t',
                 result: '2t(t-2)',
-                rule: 'Mettre le facteur commun 2t en évidence',
+                rule: 'Mettre 2t en facteur',
               },
             },
           ),
           step(
             'Le facteur commun dans les deux derniers termes',
             t`2t(t-2)-(t-2)=0`,
-            'On écrit −t + 2 = −(t − 2). Distribuer le signe moins permet de vérifier les deux signes.',
+            'On écrit −t + 2 = −(t − 2). Développer le produit par −1 permet de vérifier cette égalité.',
             {
               fromFocus: '-t+2',
               focus: '-(t-2)',
@@ -184,7 +184,7 @@ export const expTrigExercises: Exercise[] = [
               simplify: {
                 source: '2t(t-2)-(t-2)',
                 result: '(2t-1)(t-2)',
-                rule: 'Mettre le facteur commun t − 2 en évidence',
+                rule: 'Mettre t − 2 en facteur',
               },
             },
           ),
@@ -253,7 +253,7 @@ export const expTrigExercises: Exercise[] = [
             'La condition sur t',
             t`\frac12>0\qquad 2>0`,
             'Les deux valeurs respectent t > 0. Elles correspondent chacune à un réel x.',
-            { phase: 'Vérification de la substitution', statement: true },
+            { phase: 'Vérification de la condition t > 0', statement: true },
           ),
           step(
             'Les deux équations en x',
@@ -264,7 +264,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’application du logarithme',
             t`x=\ln\!\left(\frac12\right)\quad\text{ou}\quad x=\ln2`,
-            'Les deux seconds membres sont positifs. L’identité ln(eˣ) = x permet de retrouver x.',
+            'Dans les équations précédentes, 1/2 et 2 sont strictement positifs. On applique le logarithme népérien aux deux membres de chaque équation, puis on utilise ln(eˣ) = x.',
           ),
           step(
             'La simplification du premier logarithme',
@@ -282,13 +282,13 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Le contrôle de la première solution',
+            'La vérification de la première solution',
             t`2\!\left(\frac12\right)^2-5\!\left(\frac12\right)=-2`,
             'Pour x = −ln2, on a eˣ = 1/2 et e²ˣ = 1/4. Le membre de gauche vaut 1/2 − 5/2 = −2.',
-            { phase: 'Contrôle', statement: true },
+            { phase: 'Vérification', statement: true },
           ),
           step(
-            'Le contrôle de la seconde solution',
+            'La vérification de la seconde solution',
             t`2\cdot2^2-5\cdot2=-2`,
             'Pour x = ln2, on a eˣ = 2. Le membre de gauche vaut 8 − 10 = −2.',
             { statement: true },
@@ -313,14 +313,14 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’équation à résoudre',
             t`e^x-2e^{-x}-1=0`,
-            'Les deux exponentielles sont définies pour tout réel. Le domaine est ℝ.',
+            'Les deux membres de l’équation sont définis pour tout réel. Le domaine de définition est ℝ.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
             'Le changement de variable',
             t`t=e^x>0\qquad e^{-x}=\frac1t`,
-            'L’exposant −x donne l’inverse de eˣ. Puisque t > 0, le quotient 1/t existe.',
-            { phase: 'Substitution', statement: true },
+            'L’identité e⁻ˣ = 1/eˣ donne l’inverse de eˣ. Puisque t > 0, le quotient 1/t est défini.',
+            { phase: 'Changement de variable', statement: true },
           ),
           step('L’équation en t', t`t-\frac2t-1=0`, 'On remplace eˣ par t et e⁻ˣ par 1/t.', {
             statement: true,
@@ -346,9 +346,9 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Distribuer t au premier terme',
+            'Appliquer la distributivité au premier terme',
             t`t\cdot t+t\left(-\frac2t-1\right)=0`,
-            'La distributivité donne un produit par le premier terme et conserve t devant les deux termes restants. Aucun signe ne change.',
+            'On écrit t(t − 2/t − 1) = t × t + t(−2/t − 1) par distributivité. Le facteur t multiplie encore la somme des deux derniers termes.',
             {
               fromFocus: t`t\left(t-\frac2t-1\right)`,
               distribute: {
@@ -361,7 +361,7 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Distribuer t aux termes restants',
+            'Développer le produit par t',
             t`t\cdot t+t\cdot\left(-\frac2t\right)+t\cdot(-1)=0`,
             'Le facteur t multiplie −2/t puis −1. Les signes moins appartiennent aux termes multipliés.',
             {
@@ -386,16 +386,16 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Simplifier le facteur t non nul',
+            'Simplifier par t, non nul',
             t`t^2-2+t\cdot(-1)=0`,
-            'Dans t × (−2/t) = −2 × (t/t), on simplifie le facteur t car t ≠ 0. Il s’agit d’une simplification de facteurs, pas de termes d’une somme.',
+            'Dans t × (−2/t) = −2 × (t/t), le quotient t/t vaut 1 car t ≠ 0. La simplification porte sur un facteur commun au numérateur et au dénominateur.',
             {
               fromFocus: t`+t\cdot\left(-\frac2t\right)`,
               focus: '-2',
               simplify: {
                 source: t`+t\cdot\left(-\frac2t\right)`,
                 result: '-2',
-                rule: 'Simplifier le facteur commun t',
+                rule: 'Simplifier par le facteur commun t',
                 condition: t`t>0\;\Rightarrow\;t\ne0`,
                 cancel: { factor: 't', quotient: t`\frac2t` },
               },
@@ -414,13 +414,13 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le polynôme ordonné',
             t`t^2-t-2=0`,
-            'On réordonne les termes sans changer leur signe.',
+            'On ordonne le polynôme suivant les puissances décroissantes de t, sans changer le signe des termes.',
             { phase: 'Résolution en t' },
           ),
           step(
             'La factorisation',
             t`(t-2)(t+1)=0`,
-            'On cherche deux réels de somme −1 et de produit −2 : −2 et 1 conviennent. La distributivité vérifie (t − 2)(t + 1) = t² − t − 2.',
+            'On cherche deux réels de somme −1 et de produit −2 : −2 et 1 conviennent. Le développement par double distributivité vérifie (t − 2)(t + 1) = t² − t − 2.',
             {
               fromFocus: 't^2-t-2',
               focus: '(t-2)(t+1)',
@@ -430,7 +430,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'La propriété du produit nul',
             t`t-2=0\quad\text{ou}\quad t+1=0`,
-            'Au moins un des deux facteurs doit être nul.',
+            'Un produit de deux réels est nul si et seulement si au moins un de ses facteurs est nul.',
           ),
           step(
             'Ajouter 2 dans la première équation',
@@ -469,10 +469,10 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'La racine compatible',
+            'La racine qui vérifie t > 0',
             t`\{-1\,;\,2\}\cap]0\,;\,+\infty[=\{2\}`,
             'La valeur −1 est impossible : une exponentielle est toujours strictement positive.',
-            { phase: 'Vérification de la substitution', statement: true },
+            { phase: 'Vérification de la condition t > 0', statement: true },
           ),
           step(
             'Le retour à x',
@@ -483,13 +483,13 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’unique valeur de x',
             t`x=\ln2`,
-            'Le nombre 2 est strictement positif et ln est la réciproque de exp.',
+            'Le nombre 2 est strictement positif. La fonction logarithme népérien, réciproque de la fonction exponentielle, donne x = ln2.',
           ),
           step(
-            'Le contrôle dans l’équation initiale',
+            'La vérification dans l’équation initiale',
             t`2-2\cdot\frac12-1=0`,
             'Pour x = ln2, eˣ = 2 et e⁻ˣ = 1/2. Le membre de gauche vaut bien 0.',
-            { phase: 'Contrôle', statement: true },
+            { phase: 'Vérification', statement: true },
           ),
           step(
             'L’ensemble des solutions',
@@ -508,9 +508,9 @@ export const expTrigExercises: Exercise[] = [
     theme: 'Exponentielle',
     level: 'Mathématiques 1',
     minutes: 18,
-    description: 'Utiliser la positivité, la croissance et le signe d’un quotient.',
+    description: 'Utiliser la stricte positivité, la stricte croissance et le signe d’un quotient.',
     objectives: [
-      'Exploiter la positivité de exp',
+      'Utiliser la stricte positivité de l’exponentielle',
       'Comparer les exposants',
       'Construire un tableau de signes',
     ],
@@ -529,14 +529,14 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’inéquation à résoudre',
             t`\exp(-2x+3)<-3`,
-            'L’expression −2x + 3 et son exponentielle existent pour tout réel x.',
+            'L’expression −2x + 3 et son exponentielle sont définies pour tout réel x.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
             'Le signe d’une exponentielle',
             t`\exp(-2x+3)>0`,
             'Pour tout réel u, exp(u) > 0. Ici u = −2x + 3.',
-            { phase: 'Positivité', statement: true },
+            { phase: 'Stricte positivité', statement: true },
           ),
           step(
             'La comparaison impossible',
@@ -546,7 +546,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’ensemble des solutions',
             t`S=\varnothing`,
-            'Aucun réel ne satisfait l’inéquation. Prendre ln(−3) serait impossible dans les réels.',
+            'L’inéquation n’admet aucune solution réelle. L’expression ln(−3) n’est pas définie dans ℝ.',
             { phase: 'Conclusion', statement: true },
           ),
         ],
@@ -575,11 +575,11 @@ export const expTrigExercises: Exercise[] = [
           step(
             'La comparaison des exposants',
             t`-x<x`,
-            'On applique cette propriété avec a = −x et b = x. Cette étape est une équivalence.',
+            'On applique cette propriété avec a = −x et b = x. Les deux inéquations sont équivalentes.',
             { phase: 'Résolution', statement: true },
           ),
           step(
-            'L’addition de x',
+            'Ajouter x aux deux membres',
             t`0<2x`,
             'On ajoute la même quantité x aux deux membres. L’inéquation obtenue est équivalente à la précédente.',
             {
@@ -597,7 +597,7 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'La division par 2',
+            'Diviser les deux membres par 2',
             t`0<x`,
             'On divise les deux membres par 2, un nombre strictement positif. Le sens de l’inégalité est conservé.',
             {
@@ -642,24 +642,24 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’inéquation à résoudre',
             t`\frac{e^{x-3}-1}{e^x-e}\ge0`,
-            'On cherche où ce quotient existe et est positif ou nul. Son dénominateur peut changer de signe.',
+            'On cherche les valeurs de x pour lesquelles ce quotient est défini et positif ou nul. Son dénominateur peut changer de signe.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
             'La condition d’existence',
             t`e^x-e\ne0`,
-            'Le dénominateur d’un quotient doit être différent de 0.',
-            { phase: 'Domaine', statement: true },
+            'Le dénominateur d’un quotient doit être non nul.',
+            { phase: 'Domaine de définition', statement: true },
           ),
           step(
             'La valeur interdite',
             t`e^x\ne e^1\iff x\ne1`,
-            'L’exponentielle est injective : elle prend la valeur e exactement lorsque x = 1.',
+            'La fonction exponentielle est injective : eˣ = e¹ si et seulement si x = 1.',
           ),
           step(
             'Le domaine de définition',
             t`D=\mathbb R\setminus\{1\}`,
-            'Le numérateur est défini partout. Seul x = 1 doit être exclu.',
+            'Le numérateur est défini sur ℝ. La seule valeur interdite est 1, car elle annule le dénominateur.',
             { statement: true },
           ),
           step(
@@ -697,14 +697,14 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Utiliser l’injectivité de exp',
+            'Utiliser l’injectivité de l’exponentielle',
             t`x-3=0`,
             'L’exponentielle est injective sur ℝ : eˣ⁻³ = e⁰ équivaut à x − 3 = 0.',
           ),
           step(
             'Le zéro du numérateur',
             t`x=3`,
-            'On ajoute 3 aux deux membres. Le numérateur s’annule exactement en 3, qui appartient au domaine.',
+            'On ajoute 3 aux deux membres. Le numérateur s’annule exactement en 3, qui appartient au domaine de définition.',
             {
               fromFocus: 'x-3=0',
               focus: 'x=3',
@@ -722,39 +722,39 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le signe du numérateur',
             t`e^{x-3}-1<0\iff x<3`,
-            'Par stricte croissance, eˣ⁻³ < 1 équivaut à x − 3 < 0. Le numérateur est positif pour x > 3.',
+            'Par stricte croissance, eˣ⁻³ < 1 équivaut à x − 3 < 0. Le numérateur est strictement positif pour x > 3.',
             { statement: true },
           ),
           step(
             'Le signe du dénominateur',
             t`e^x-e<0\iff x<1`,
-            'Par stricte croissance, eˣ < e¹ équivaut à x < 1. Le dénominateur est positif pour x > 1.',
+            'Par stricte croissance, eˣ < e¹ équivaut à x < 1. Le dénominateur est strictement positif pour x > 1.',
             { phase: 'Signe du dénominateur', statement: true },
           ),
           ...signTableSteps(
             quotientSigns,
             [
-              'Le numérateur est négatif pour x < 3, nul en 3 et positif pour x > 3. Il reste négatif de part et d’autre de 1.',
-              'Le dénominateur est négatif pour x < 1, nul en 1 et positif pour x > 1. Son zéro rend le quotient interdit.',
-              'Des signes identiques donnent un quotient positif. En 1, le quotient n’existe pas : double barre. En 3, seul le numérateur s’annule : le quotient vaut 0.',
+              'Le numérateur est strictement négatif pour x < 3, nul en 3 et strictement positif pour x > 3. Il garde le même signe de part et d’autre de 1.',
+              'Le dénominateur est strictement négatif pour x < 1, nul en 1 et strictement positif pour x > 1. Le quotient n’est pas défini en 1.',
+              'Deux nombres non nuls de même signe ont un quotient strictement positif. En 1, le quotient n’est pas défini : on trace une double barre. En 3, seul le numérateur s’annule : le quotient vaut 0.',
             ],
             [0, 2],
             [1],
-            'On retient les intervalles de signe + et le zéro en 3. Le point 1 reste exclu malgré l’inégalité large.',
+            'On retient les intervalles où le quotient est strictement positif et la valeur 3, où il est nul. La valeur interdite 1 reste exclue.',
           ),
           step(
             'L’ensemble des solutions',
             t`S=]-\infty\,;\,1[\,\cup\,[3\,;\,+\infty[`,
-            'Le quotient est positif pour x < 1 et x > 3. Il est nul en 3, donc cette borne est incluse. La valeur 1 reste interdite.',
+            'Le quotient est strictement positif pour x < 1 ou x > 3. Il est nul en 3, donc cette borne est incluse. La valeur 1 reste interdite.',
             { phase: 'Conclusion', statement: true },
           ),
           textStep(
             'Le piège à éviter',
             [
-              'Multiplier par le dénominateur impose de connaître son signe.',
-              'Le tableau traite les deux signes et la valeur interdite.',
+              'Multiplier les deux membres par le dénominateur impose de connaître son signe.',
+              'Le tableau de signes distingue les intervalles et la valeur interdite.',
             ],
-            'Multiplier par une quantité négative renverse le sens de l’inégalité. Le signe de eˣ − e dépend ici de x.',
+            'Multiplier les deux membres par une quantité strictement négative renverse le sens de l’inégalité. Le signe de eˣ − e dépend ici de x.',
             'Méthode',
           ),
         ],
@@ -768,19 +768,19 @@ export const expTrigExercises: Exercise[] = [
     theme: 'Cercle trigonométrique',
     level: 'Mathématiques 1',
     minutes: 23,
-    description: 'Lire les coordonnées du cercle, puis décrire les familles périodiques.',
+    description: 'Lire les coordonnées d’un point du cercle trigonométrique, puis écrire toutes les solutions.',
     objectives: [
-      'Lire cos comme abscisse et sin comme ordonnée',
+      'Interpréter le cosinus comme une abscisse et le sinus comme une ordonnée',
       'Travailler en radians',
       'Écrire toutes les solutions réelles',
     ],
-    prerequisites: ['Cercle unité', 'Angles remarquables', 'Périodicité'],
+    prerequisites: ['Cercle trigonométrique', 'Angles remarquables', 'Périodicité'],
     color: 'sage',
     activities: [
       {
         id: 'td3-6-rappel',
-        label: 'Repères · Le cercle unité',
-        prompt: 'Relier un angle à ses coordonnées.',
+        label: 'Repères · Le cercle trigonométrique',
+        prompt: 'Relier un angle aux coordonnées du point associé.',
         tex: t`M(\cos\theta\,;\,\sin\theta)`,
         result: t`\cos(\theta+2k\pi)=\cos\theta`,
         visual: 'trig',
@@ -789,13 +789,13 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Les coordonnées d’un point du cercle',
             t`M(\cos\theta\,;\,\sin\theta)`,
-            'Sur le cercle unité, cos θ est l’abscisse et sin θ l’ordonnée. Les angles de ce TD sont en radians.',
+            'Sur le cercle trigonométrique, le point associé à θ a pour abscisse cos θ et pour ordonnée sin θ. Les angles sont mesurés en radians.',
             { phase: 'Repères', statement: true },
           ),
           step(
             'Le cosinus se lit horizontalement',
             t`\cos(\pi/3)=\frac12`,
-            'La projection du point d’angle π/3 sur l’axe horizontal donne son abscisse 1/2.',
+            'La projection orthogonale du point associé à π/3 sur l’axe des abscisses permet de lire cos(π/3) = 1/2.',
             {
               circle: { angle: Math.PI / 3, label: t`\cos(\pi/3)=\frac12`, axis: 'cos' },
               statement: true,
@@ -804,7 +804,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le sinus se lit verticalement',
             t`\sin(\pi/6)=\frac12`,
-            'La projection du point d’angle π/6 sur l’axe vertical donne son ordonnée 1/2.',
+            'La projection orthogonale du point associé à π/6 sur l’axe des ordonnées permet de lire sin(π/6) = 1/2.',
             {
               circle: { angle: Math.PI / 6, label: t`\sin(\pi/6)=\frac12`, axis: 'sin' },
               statement: true,
@@ -836,13 +836,13 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’angle auxiliaire',
             t`\theta=3x\qquad\sin\theta=1`,
-            'On cherche d’abord les angles θ dont l’ordonnée sur le cercle vaut 1.',
+            'On cherche d’abord les réels θ dont le point associé sur le cercle trigonométrique a pour ordonnée 1.',
             { phase: 'Lecture du cercle', statement: true },
           ),
           step(
             'Le point le plus haut du cercle',
             t`\sin(\pi/2)=1`,
-            'Sur un tour, l’ordonnée 1 n’est atteinte qu’au sommet du cercle, à l’angle π/2.',
+            'Sur le cercle trigonométrique, seul le point de coordonnées (0 ; 1), associé à π/2, a pour ordonnée 1.',
             {
               circle: { angle: Math.PI / 2, label: t`\sin(\pi/2)=1`, axis: 'sin' },
               statement: true,
@@ -851,8 +851,8 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Tous les angles possibles',
             t`\theta=\frac\pi2+2k\pi,\quad k\in\mathbb Z`,
-            'Chaque tour complet conserve le sinus. Le sommet est l’unique point d’ordonnée 1, donc cette famille contient tous les angles possibles.',
-            { phase: 'Tous les tours', statement: true },
+            'Le sinus est 2π-périodique. Le point (0 ; 1) est l’unique point du cercle d’ordonnée 1 : cette famille donne donc toutes les solutions en θ.',
+            { phase: 'Périodicité', statement: true },
           ),
           step(
             'Le retour à l’angle 3x',
@@ -881,7 +881,7 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Écrire la division comme un produit',
+            'Écrire le quotient comme un produit',
             t`x=\frac13\left(\frac\pi2+2k\pi\right),\quad k\in\mathbb Z`,
             'Diviser une somme par 3 revient à multiplier cette somme par 1/3.',
             {
@@ -898,7 +898,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Distribuer le facteur 1/3',
             t`x=\frac13\cdot\frac\pi2+\frac13\cdot2k\pi,\quad k\in\mathbb Z`,
-            'Par distributivité, le facteur 1/3 multiplie chacun des deux termes. Le terme de périodicité est lui aussi divisé par 3.',
+            'Par distributivité, le facteur 1/3 multiplie chacun des deux termes de la somme, y compris 2kπ.',
             {
               fromFocus: t`\frac13\left(\frac\pi2+2k\pi\right)`,
               distribute: {
@@ -921,9 +921,9 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Calculer le terme de périodicité',
+            'Calculer le second produit',
             t`x=\frac\pi6+\frac{2k\pi}3,\quad k\in\mathbb Z`,
-            'Le produit (1/3) × 2kπ vaut 2kπ/3. On obtient ainsi toutes les solutions ; la période en x est 2π/3.',
+            'Le produit (1/3) × 2kπ vaut 2kπ/3. On obtient toutes les solutions. La fonction x ↦ sin(3x) a pour période 2π/3.',
             {
               fromFocus: t`\frac13\cdot2k\pi`,
               focus: t`\frac{2k\pi}3`,
@@ -934,18 +934,18 @@ export const expTrigExercises: Exercise[] = [
             'L’angle obtenu par substitution',
             t`3\left(\frac\pi6+\frac{2k\pi}3\right)=\frac\pi2+2k\pi`,
             'Pour tout entier k, multiplier la valeur proposée de x par 3 donne l’angle π/2, à un nombre entier de tours près.',
-            { phase: 'Contrôle', statement: true },
+            { phase: 'Vérification', statement: true },
           ),
           step(
-            'Le contrôle de toute la famille',
+            'La vérification de toute la famille',
             t`\sin\!\left(\frac\pi2+2k\pi\right)=1`,
-            'Le sinus vaut 1 au sommet du cercle et les tours complets ne changent pas cette valeur.',
+            'Le point (0 ; 1) du cercle a pour ordonnée 1. La périodicité du sinus permet de retrouver cette valeur après un nombre entier de tours.',
             { statement: true },
           ),
           step(
             'L’ensemble des solutions',
             t`S=\left\{\frac\pi6+\frac{2k\pi}3\;:\;k\in\mathbb Z\right\}`,
-            'Les valeurs de k parcourent tous les entiers, positifs, nuls et négatifs. La période en x est 2π/3.',
+            'L’entier relatif k parcourt ℤ. Deux solutions successives diffèrent de 2π/3.',
             { phase: 'Conclusion', statement: true },
           ),
         ],
@@ -962,7 +962,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’équation à résoudre',
             t`4\cos x+1=3`,
-            'Le cosinus existe pour tout réel. On commence par isoler cos x.',
+            'La fonction cosinus est définie sur ℝ. On commence par isoler cos x.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
@@ -1006,7 +1006,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Simplifier la fraction',
             t`\cos x=\frac12`,
-            'On divise le numérateur et le dénominateur de 2/4 par leur facteur commun 2. La valeur du quotient est conservée.',
+            'On divise le numérateur et le dénominateur de 2/4 par leur diviseur commun 2. La valeur du quotient est conservée.',
             {
               fromFocus: t`\frac24`,
               focus: t`\frac12`,
@@ -1021,7 +1021,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le premier angle sur un tour',
             t`\cos(\pi/3)=\frac12`,
-            'Le point d’angle π/3 a pour abscisse 1/2.',
+            'Le point du cercle trigonométrique associé à π/3 a pour abscisse 1/2.',
             {
               phase: 'Lecture du cercle',
               circle: { angle: Math.PI / 3, label: t`\cos(\pi/3)=\frac12`, axis: 'cos' },
@@ -1031,7 +1031,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le second angle sur un tour',
             t`\cos(5\pi/3)=\frac12`,
-            'La symétrie par rapport à l’axe horizontal conserve l’abscisse. Le point symétrique a pour angle 2π − π/3 = 5π/3.',
+            'La symétrie par rapport à l’axe des abscisses conserve l’abscisse. Le point symétrique est associé à 2π − π/3 = 5π/3.',
             {
               circle: { angle: (5 * Math.PI) / 3, label: t`\cos(5\pi/3)=\frac12`, axis: 'cos' },
               statement: true,
@@ -1039,12 +1039,12 @@ export const expTrigExercises: Exercise[] = [
           ),
           step(
             'Les deux solutions sur un tour',
-            t`x\in\left\{\frac\pi3\,;\,\frac{5\pi}3\right\}\quad\text{sur }[0,2\pi[`,
-            'La droite d’abscisse 1/2 coupe le cercle en exactement deux points. Les deux angles trouvés suffisent sur un tour.',
+            t`x\in\left\{\frac\pi3\,;\,\frac{5\pi}3\right\}\quad\text{sur }[0;2\pi[`,
+            'La droite verticale d’abscisse 1/2 coupe le cercle en exactement deux points. On obtient donc exactement deux solutions dans [0 ; 2π[.',
             { statement: true },
           ),
           step(
-            'L’écriture de tous les tours',
+            'Toutes les solutions par périodicité',
             t`x=\frac\pi3+2k\pi\quad\text{ou}\quad x=\frac{5\pi}3+2k\pi,\quad k\in\mathbb Z`,
             'On ajoute tous les multiples entiers de 2π à chacun des deux angles.',
             { phase: 'Périodicité', statement: true },
@@ -1055,10 +1055,10 @@ export const expTrigExercises: Exercise[] = [
             'Comme 5π/3 = −π/3 + 2π, les angles 5π/3 et −π/3 engendrent la même famille de solutions.',
           ),
           step(
-            'Le contrôle dans l’équation initiale',
+            'La vérification dans l’équation initiale',
             t`4\cdot\frac12+1=3`,
             'Chaque angle des deux familles a pour cosinus 1/2. Il vérifie donc bien l’équation de départ.',
-            { phase: 'Contrôle', statement: true },
+            { phase: 'Vérification', statement: true },
           ),
           step(
             'L’ensemble des solutions',
@@ -1092,7 +1092,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le premier point d’intersection',
             t`\cos(\pi/4)=\sin(\pi/4)=\frac{\sqrt2}{2}`,
-            'Dans le premier quadrant, l’angle π/4 partage l’angle droit en deux. L’abscisse et l’ordonnée valent toutes deux √2/2.',
+            'Dans le premier quadrant, l’angle de mesure π/4 est la moitié d’un angle droit. L’abscisse et l’ordonnée valent toutes deux √2/2.',
             {
               circle: { angle: Math.PI / 4, label: t`\cos(\pi/4)=\sin(\pi/4)`, axis: 'cos' },
               statement: true,
@@ -1112,20 +1112,20 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'Les deux familles sur tous les tours',
+            'Les deux familles de solutions',
             t`x=\frac\pi4+2k\pi\quad\text{ou}\quad x=\frac{5\pi}4+2k\pi`,
             'On ajoute des tours complets aux deux angles trouvés. Ici k parcourt ℤ.',
             { phase: 'Toutes les solutions', statement: true },
           ),
           step(
-            'Une seule famille de pas π',
+            'Une seule famille de solutions',
             t`x=\frac\pi4+k\pi,\quad k\in\mathbb Z`,
             'Si k est pair, on retrouve le premier point. Si k est impair, on retrouve le point opposé. La famille réunit exactement les deux précédentes.',
           ),
           textStep(
             'Autre méthode : la tangente',
             [
-              'Avant de diviser par cos x, on prouve qu’il est non nul à toute solution.',
+              'Avant de diviser par cos x, on prouve que cos x ≠ 0 pour toute solution de l’équation.',
               'Si cos x = 0, l’équation impose sin x = 0 : impossible puisque sin²x + cos²x = 1.',
             ],
             'Une division par une expression dépendant de x exige de vérifier qu’elle ne s’annule pas. La méthode géométrique précédente ne nécessitait aucune division.',
@@ -1175,7 +1175,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’ensemble des solutions',
             t`S=\left\{\frac\pi4+k\pi\;:\;k\in\mathbb Z\right\}`,
-            'Les deux points du cercle de coordonnées égales donnent cette famille complète. La méthode par la tangente retrouve les mêmes angles, où cos x est bien non nul.',
+            'Les deux points du cercle dont l’abscisse égale l’ordonnée donnent toutes les solutions. La méthode par la tangente retrouve la même famille, pour laquelle cos x ≠ 0.',
             { phase: 'Conclusion', statement: true },
           ),
         ],
@@ -1190,44 +1190,44 @@ export const expTrigExercises: Exercise[] = [
     level: 'Mathématiques 1',
     minutes: 12,
     description:
-      'Repérer les angles frontières et lire l’arc dont l’abscisse satisfait une inégalité stricte.',
+      'Résoudre l’équation associée, puis repérer les points du cercle dont l’abscisse satisfait l’inégalité stricte.',
     objectives: [
       'Interpréter cos x comme une abscisse',
-      'Choisir un arc solution',
-      'Exclure les bornes d’une inégalité stricte',
+      'Repérer l’arc correspondant aux solutions',
+      'Déterminer si les bornes appartiennent à l’ensemble des solutions',
     ],
-    prerequisites: ['Angles remarquables', 'Cercle unité', 'Intervalles'],
+    prerequisites: ['Angles remarquables', 'Cercle trigonométrique', 'Intervalles'],
     color: 'sage',
     activities: [
       {
         id: 'td3-7',
         label: '7 · L’arc des solutions',
         prompt: 'Résoudre sur [0 ; 2π].',
-        tex: t`\cos x<\frac{\sqrt3}{2}\qquad x\in[0,2\pi]`,
+        tex: t`\cos x<\frac{\sqrt3}{2}\qquad x\in[0;2\pi]`,
         result: t`S=]\frac\pi6\,;\,\frac{11\pi}6[`,
         visual: 'trig',
-        initialDomain: t`[0,2\pi]`,
+        initialDomain: t`[0;2\pi]`,
         steps: [
           step(
             'L’inéquation et l’intervalle imposé',
-            t`\cos x<\frac{\sqrt3}{2}\qquad x\in[0,2\pi]`,
-            'On cherche uniquement les solutions entre 0 et 2π, bornes comprises au départ. On ne rajoutera donc pas de famille 2kπ.',
+            t`\cos x<\frac{\sqrt3}{2}\qquad x\in[0;2\pi]`,
+            'L’intervalle de résolution est [0 ; 2π]. On ne conserve que les solutions qui appartiennent à cet intervalle.',
             { phase: 'Énoncé', statement: true },
           ),
           step(
             'La coordonnée à comparer',
             t`x_M=\cos x<\frac{\sqrt3}{2}`,
-            'Le cosinus est l’abscisse du point M. On cherche les points strictement à gauche de la droite verticale d’abscisse √3/2.',
+            'Le point M associé à x a pour abscisse cos x. On cherche les points strictement à gauche de la droite verticale d’abscisse √3/2.',
             { phase: 'Lecture géométrique', statement: true },
           ),
           step(
-            'L’équation des frontières',
+            'L’équation associée',
             t`\cos x=\frac{\sqrt3}{2}`,
-            'On commence par repérer les points où l’abscisse atteint exactement la valeur frontière.',
-            { phase: 'Angles frontières', statement: true },
+            'On résout d’abord l’équation associée cos x = √3/2 pour repérer les extrémités de l’arc.',
+            { phase: 'Équation associée', statement: true },
           ),
           step(
-            'La première frontière',
+            'La première solution de l’équation associée',
             t`\cos(\pi/6)=\frac{\sqrt3}{2}`,
             'L’angle remarquable π/6 donne le point situé dans le premier quadrant.',
             {
@@ -1236,9 +1236,9 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'La seconde frontière',
+            'La seconde solution de l’équation associée',
             t`\cos(11\pi/6)=\frac{\sqrt3}{2}`,
-            'Le point symétrique par rapport à l’axe horizontal a pour angle 2π − π/6 = 11π/6.',
+            'Le point symétrique par rapport à l’axe des abscisses est associé à 2π − π/6 = 11π/6.',
             {
               circle: {
                 angle: (11 * Math.PI) / 6,
@@ -1251,7 +1251,7 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Un point de l’arc à conserver',
             t`\cos\pi=-1<\frac{\sqrt3}{2}`,
-            'Le point de gauche du cercle, d’angle π, satisfait l’inégalité. Il appartient au grand arc compris entre les deux frontières.',
+            'Le point associé à π a pour abscisse −1 < √3/2. Il appartient au grand arc délimité par les deux points trouvés.',
             {
               phase: 'Choix de l’arc',
               circle: { angle: Math.PI, label: t`\cos\pi=-1`, axis: 'cos' },
@@ -1259,15 +1259,15 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
-            'L’arc situé à gauche de la frontière',
+            'L’arc correspondant aux solutions',
             t`\frac\pi6<x<\frac{11\pi}6`,
-            'En parcourant le cercle dans le sens positif depuis π/6 jusqu’à 11π/6, tous les points intermédiaires sont strictement à gauche de la droite. Les cercles ouverts excluent les deux frontières.',
+            'Dans le sens trigonométrique de π/6 à 11π/6, les points de l’arc sont strictement à gauche de la droite. Les deux cercles vides indiquent que les extrémités sont exclues.',
             { statement: true, graph: 'cosine-inequality' },
           ),
           step(
-            'Les deux frontières sont exclues',
+            'Les deux bornes sont exclues',
             t`x\ne\frac\pi6\qquad x\ne\frac{11\pi}6`,
-            'Aux deux angles frontières, le cosinus vaut exactement √3/2. Le signe < exclut l’égalité.',
+            'Pour x = π/6 et x = 11π/6, le cosinus vaut √3/2. L’inégalité stricte exclut ces deux valeurs.',
             { phase: 'Bornes', statement: true },
           ),
           step(
@@ -1297,16 +1297,16 @@ export const expTrigExercises: Exercise[] = [
             'Logarithmes',
             [
               'Chaque argument doit être strictement positif.',
-              'La croissance de ln conserve le sens des inégalités.',
+              'La stricte croissance de la fonction logarithme népérien conserve le sens des inégalités.',
             ],
-            'Les solutions d’une équation transformée doivent encore appartenir au domaine initial.',
+            'Les solutions obtenues doivent appartenir au domaine de définition de l’équation initiale.',
             'Bilan du TD',
           ),
           textStep(
             'Exponentielles',
             [
               'Une exponentielle est toujours strictement positive.',
-              'Après t = eˣ, on conserve seulement t > 0 puis on revient à x.',
+              'Après le changement de variable t = eˣ, on retient les valeurs t > 0, puis on retrouve x = ln(t).',
             ],
             'Une racine négative du polynôme en t ne fournit aucune solution réelle x.',
           ),
@@ -1314,17 +1314,17 @@ export const expTrigExercises: Exercise[] = [
             'Quotients et intervalles',
             [
               'Une valeur interdite reste exclue, même si l’inégalité est large.',
-              'Un zéro admis est inclus pour ≤ ou ≥ et exclu pour < ou >.',
+              'Une valeur du domaine qui annule l’expression est retenue pour ≤ 0 ou ≥ 0, et exclue pour < 0 ou > 0.',
             ],
             'Les crochets traduisent les conditions exactes de l’énoncé et le domaine de définition.',
           ),
           textStep(
             'Trigonométrie',
             [
-              'Dans ℝ, on écrit toutes les familles périodiques.',
+              'Pour une résolution dans ℝ, on écrit toutes les solutions en tenant compte de la périodicité.',
               'Sur un intervalle imposé, on ne conserve que les angles de cet intervalle.',
             ],
-            'Le coefficient de l’angle change aussi la période en x : dans sin(3x), elle vaut 2π/3.',
+            'La fonction x ↦ sin(3x) a pour période 2π/3. Diviser l’angle 3x par 3 exige de diviser aussi le terme 2kπ.',
           ),
         ],
       },

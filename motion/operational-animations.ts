@@ -78,7 +78,7 @@ export function* animateBalance(
     {
       add: 'Ajouter la même quantité aux deux membres',
       subtract: 'Soustraire la même quantité aux deux membres',
-      multiply: 'Multiplier les deux membres par le même facteur',
+      multiply: 'Multiplier les deux membres par le même facteur non nul',
       divide: 'Diviser les deux membres par le même nombre non nul',
     }[work.operation],
   );
@@ -123,13 +123,13 @@ export function* animateBalance(
   yield* all(operationLeft.end(1, 0.4), operationRight.end(1, 0.4));
   title.text(
     work.reverses
-      ? 'Nombre négatif : le sens de l’inégalité est inversé'
-      : 'Même opération effectuée dans chacun des deux membres',
+      ? 'Nombre strictement négatif : sens de l’inégalité inversé'
+      : 'Même opération appliquée aux deux membres',
   );
   yield* waitFor(1.05);
   operationLeft.remove();
   operationRight.remove();
-  title.text('Réduire chaque membre, puis conserver la relation obtenue');
+  title.text('Simplifier chacun des deux membres');
   // The resulting members are introduced as complete mathematical expressions,
   // not arbitrary digit morphs. Their arrows identify exactly what is reduced.
   const output = positions.output;

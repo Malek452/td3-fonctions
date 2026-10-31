@@ -33,8 +33,8 @@ const fr = {
   tableRegion: 'Tableau de signes, défilement horizontal si nécessaire',
   forbidden: 'valeur interdite',
   radius: 'Plaçons le rayon…',
-  horizontal: 'On lit la coordonnée horizontale.',
-  vertical: 'On lit la coordonnée verticale.',
+  horizontal: 'On lit l’abscisse du point.',
+  vertical: 'On lit l’ordonnée du point.',
   fold: 'b : grand côté avant pliage',
 };
 const en: Record<keyof typeof fr, string> = {
