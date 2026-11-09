@@ -521,7 +521,7 @@ export const expTrigExercises: Exercise[] = [
             [0, 2],
             [1],
             'On retient les intervalles où le quotient est strictement positif et la valeur 3, où il est nul. La valeur interdite 1 reste exclue.',
-          ),
+          ).map((tableStep) => ({ ...tableStep, phase: 'Tableau de signes' })),
           step(
             'L’ensemble des solutions',
             t`S=]-\infty\,;\,1[\,\cup\,[3\,;\,+\infty[`,
