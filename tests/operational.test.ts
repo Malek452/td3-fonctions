@@ -352,3 +352,60 @@ it('cancellation rejects additive terms, a different denominator and an unstated
     /requires a nonzero condition/,
   );
 });
+
+it('exponential cancellation selects the complete two factors and leaves the numerator and context intact', () => {
+  for (const quotient of [t`\frac2{e^x}`, t`\frac{2}{e^x}`]) {
+    const source = t`+e^x\cdot\left(-${quotient}\right)`;
+    const previous = t`(e^x)^2${source}-e^x=0`;
+    const current: Step = {
+      title: 'Simplifier par eˣ',
+      tex: t`(e^x)^2-2-e^x=0`,
+      why: 'L’exponentielle est strictement positive, donc non nulle.',
+      fromFocus: source,
+      focus: '-2',
+      simplify: {
+        source,
+        result: '-2',
+        rule: 'Simplifier par le facteur non nul eˣ',
+        condition: t`e^x>0\Rightarrow e^x\ne0`,
+        cancel: { factor: 'e^x', quotient },
+      },
+    };
+    const plan = simplifyPlan(previous, current);
+    for (const tag of ['cancelFactor', 'cancelDenominator']) {
+      assert.equal(roleText(previous, plan.source, tag), 'e^x');
+      assert.equal(roleText(plan.equality.tex, plan.equality.ranges, tag), 'e^x');
+    }
+    const external = plan.source.find((range) => range.tag === 'cancelFactor')!;
+    const denominator = plan.source.find((range) => range.tag === 'cancelDenominator')!;
+    assert.equal(external.start, previous.indexOf('+e^x') + 1);
+    assert.equal(denominator.start, previous.indexOf(quotient) + quotient.lastIndexOf('e^x'));
+    assert.ok(external.end < previous.indexOf(quotient), 'the numerator is not struck out');
+    assert.ok(denominator.end < previous.lastIndexOf('-e^x'), 'the unrelated exponential remains');
+    assert.equal(roleText(current.tex, plan.target, 'result'), '-2');
+    assert.equal(plan.equality.tex, `${source}=-2`);
+    katex.renderToString(plan.equality.tex, { throwOnError: true, strict: 'error' });
+  }
+});
+
+it('exponential cancellation rejects sums, changed exponents, unbraced denominators and missing conditions', () => {
+  const attempt = (source: string, quotient: string, condition?: string): Step => ({
+    title: 'Simplifier',
+    tex: '2',
+    why: 'Hypothèse de test.',
+    fromFocus: source,
+    focus: '2',
+    simplify: {
+      source, result: '2', rule: 'Simplifier un facteur', condition,
+      cancel: { factor: 'e^x', quotient },
+    },
+  });
+  const sum = t`e^x+\frac2{e^x}`;
+  assert.throws(() => simplifyPlan(sum, attempt(sum, t`\frac2{e^x}`, 'e^x>0')), /product, never to additive terms/);
+  for (const quotient of [t`\frac2{e^y}`, t`\frac2{e^x+1}`, t`\frac2e^x`]) {
+    const source = t`e^x\times${quotient}`;
+    assert.throws(() => simplifyPlan(source, attempt(source, quotient, 'e^x>0')), /denominator must be exactly the common factor/);
+  }
+  const source = t`e^x\times\frac2{e^x}`;
+  assert.throws(() => simplifyPlan(source, attempt(source, t`\frac2{e^x}`)), /requires a nonzero condition/);
+});

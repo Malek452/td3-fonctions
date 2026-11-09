@@ -10,6 +10,8 @@ Les 7 exercices et leurs 15 questions sont traités : propriétés des logarithm
 
 Le cours joint « Chapitre 3 – Limites et continuité » inspire les repères graphiques et les rappels de croissance de ln et exp. Son thème principal diffère du TD. Les courbes et les cercles ont été redessinés pour cette présentation ; ils ne sont pas des captures des pages du cours.
 
+Les exercices 4 à 7 suivent les démarches du corrigé fourni : changement de variable et discriminant, étude du signe du quotient, puis résolution sur le cercle trigonométrique. La méthode par la tangente est signalée comme un complément facultatif hors programme. Les figures relient les abscisses, les points du cercle et les familles de solutions.
+
 ## Animations des opérations
 
 Les transformations présentent leurs rôles mathématiques : le facteur se distribue sur chaque terme ; une addition, une soustraction, une multiplication ou une division s'applique aux deux membres ; la réduction de termes semblables montre le calcul des coefficients. Les simplifications ciblent une sous-expression et indiquent leur justification. Les conditions de division et le changement de sens d'une inégalité sont explicités.
@@ -44,5 +46,6 @@ Le dépôt possède son propre historique, ses tests et son déploiement GitHub 
 ## Sources et attribution
 
 - F. Marotte, « Feuille TD no 3 », Mathématiques 1, 2026–2027 : énoncés fournis par l'enseignant.
+- F. Marotte, corrigé de la « Feuille TD no 3 », fichier « 2026-2027 - L1S1 - TD(1).pdf », pages 3–5 : démarches des exercices 4 à 7 et inspiration des figures.
 - « Chapitre 3 – Limites et continuité », pages imprimées 29–42 : rappels et inspiration graphique.
 - Modèle logiciel Atelier Présentations, licence MIT conservée dans `LICENSE`. Les droits sur les documents pédagogiques restent ceux de leurs auteurs.

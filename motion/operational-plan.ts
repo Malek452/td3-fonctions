@@ -112,11 +112,13 @@ export function simplifyPlan(previous: string, step: Step) {
   if (s.cancel) {
     const { factor, quotient } = s.cancel;
     if (!s.condition?.trim()) throw new Error('Factor cancellation requires a nonzero condition.');
-    // Deliberately narrow grammar: a single factor multiplying a quotient.
+    // Deliberately narrow grammar: a variable or e raised to one variable,
+    // multiplying a quotient with exactly that denominator. A compound
+    // denominator must be braced: \frac2e^x means (2/e)^x, not 2/(e^x).
     // It can never strike a term of a sum (a+b)/a or a shared function name.
-    if (!/^[A-Za-z]$/.test(factor))
-      throw new Error('Cancellation supports one named variable factor.');
-    const match = /^\\frac(?:\{([^{}]+)\}|([^{}\\\s]))(?:\{([A-Za-z])\}|([A-Za-z]))$/.exec(
+    if (!/^(?:[A-Za-z]|e\^[A-Za-z])$/.test(factor))
+      throw new Error('Cancellation supports a named variable or a simple exponential factor.');
+    const match = /^\\frac(?:\{([^{}]+)\}|([^{}\\\s]))(?:\{([^{}]+)\}|([A-Za-z]))$/.exec(
       quotient,
     );
     if (!match || (match[3] || match[4]) !== factor)

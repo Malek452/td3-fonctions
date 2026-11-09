@@ -1,6 +1,7 @@
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { activities } from '../src/content';
+import { renderPrintSurface } from '../src/components/print-surfaces';
 import type { Activity, SignTableFrame } from '../src/types';
 
 // These checks use the source worksheet equations, independently of the authored
@@ -260,4 +261,30 @@ it('exercise 7 selects the large arc and excludes both equality endpoints', () =
   ])
     assert.equal(Math.cos(x) < threshold, Math.PI / 6 < x && x < (11 * Math.PI) / 6);
   assert.ok(Math.cos(0) > threshold && Math.cos(2 * Math.PI) > threshold);
+});
+
+it('the new circle diagrams place both solutions on the circle and the required line', () => {
+  for (const graph of ['cosine-equation', 'sine-cosine-equation'] as const) {
+    const host = document.createElement('div');
+    host.innerHTML = renderPrintSurface({ graph, title: 'Figure', tex: 'x', why: 'Lecture géométrique' });
+    const circle = host.querySelector('circle:not(.solution-point)')!;
+    const cx = Number(circle.getAttribute('cx'));
+    const cy = Number(circle.getAttribute('cy'));
+    const r = Number(circle.getAttribute('r'));
+    const points = [...host.querySelectorAll('.solution-point')].map((point) => ({
+      x: (Number(point.getAttribute('cx')) - cx) / r,
+      y: (cy - Number(point.getAttribute('cy'))) / r,
+    }));
+    assert.equal(points.length, 2);
+    for (const point of points) {
+      close(point.x ** 2 + point.y ** 2, 1, `${graph}: point on the unit circle`);
+      if (graph === 'cosine-equation') close(4 * point.x + 1, 3, 'original equation 6b');
+      else close(point.x, point.y, 'original equation 6c');
+    }
+    assert.ok(points[0].y > 0 && points[1].y < 0, 'both distinct solutions must appear');
+    if (graph === 'sine-cosine-equation') {
+      close(points[0].x + points[1].x, 0);
+      close(points[0].y + points[1].y, 0);
+    }
+  }
 });

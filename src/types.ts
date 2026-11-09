@@ -88,7 +88,7 @@ export interface Step {
   statement?: boolean;
   table?: SignTableFrame;
   /** Exact reference curves and a dedicated trigonometric inequality figure. */
-  graph?: 'log' | 'exp' | 'cosine-inequality';
+  graph?: 'log' | 'exp' | 'cosine-equation' | 'sine-cosine-equation' | 'cosine-abscissas' | 'cosine-inequality';
   /** Optional diagram only on the step where it is explained. */
   diagram?: 'fold';
   circle?: { angle: number; label: string; axis: 'sin' | 'cos' };
