@@ -102,7 +102,7 @@ function CirclePanel({ frame, x, width }: { frame: TrigFrame; x: number; width: 
         <text x={cx - 12} y={cy - r - 4} textAnchor="end">
           1
         </text>
-        <text x={cx - 12} y={cy + r + 7} textAnchor="end">
+        <text x={cx - 12} y={cy + r + 22} textAnchor="end">
           −1
         </text>
         <text x={cx} y="18" textAnchor="middle">
