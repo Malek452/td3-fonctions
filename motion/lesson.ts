@@ -40,7 +40,9 @@ export default makeScene2D(function* (view) {
     circleInstruction = null;
     diagramNodes.forEach((n) => n.remove());
     diagramNodes.length = 0;
-    formula.root.opacity(step.diagram || step.circle || step.prose || step.graph ? 0 : 1);
+    formula.root.opacity(
+      step.diagram || step.circle || step.prose || step.graph || step.trig ? 0 : 1,
+    );
     if (step.diagram === 'fold') {
       diagramNodes.push(
         new Rect({
@@ -214,10 +216,17 @@ export default makeScene2D(function* (view) {
     }
     const source = sourcePoses(layouts[i - 1], equations.equations[steps[i].source]);
     const target = layouts[i];
-    if (previous.table || previous.diagram || previous.circle || previous.prose || previous.graph)
+    if (
+      previous.table ||
+      previous.diagram ||
+      previous.circle ||
+      previous.prose ||
+      previous.graph ||
+      previous.trig
+    )
       formula.show(target);
     else yield* formula.to(source, 0.25, 0);
-    if (s.table || s.prose || s.graph) {
+    if (s.table || s.prose || s.graph || s.trig) {
       // The accessible HTML table occupies this same surface in the reader.
       // Keep editor/export timeline slots deterministic without morphing tables.
       formula.show(target);
@@ -236,7 +245,8 @@ export default makeScene2D(function* (view) {
       previous.diagram ||
       previous.circle ||
       previous.prose ||
-      previous.graph
+      previous.graph ||
+      previous.trig
     ) {
       yield* formula.emphasize(0.7);
     } else if (steps[i].statement) {

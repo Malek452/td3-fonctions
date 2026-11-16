@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'katex/dist/katex.min.css';
 import './styles.css';
+import './components/trig-slide.css';
 import App from './App';
 import { presentation } from '../presentation.config';
 import { applyTheme } from './theme';

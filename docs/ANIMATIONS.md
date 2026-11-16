@@ -71,6 +71,41 @@ Introducing `x_1=(-b-\sqrt{\Delta})/(2a)` after computing a discriminant is a ne
 - `diagram: 'fold'` retains the original rectangle-folding illustration. It is a specific schematic, not a general geometry system. It uses the label for the long side `b`; do not claim it represents arbitrary dimensions or a proof of a new geometric statement.
 - `textStep` uses a short positional transition for readable paragraphs. It does not imply a mathematical equivalence between text blocks.
 
+## Synchronized trigonometry views
+
+`trig` is a dedicated surface on the same board. It renders a unit circle, one or two function graphs, and a graduated real line. Do not combine it with `circle`, `graph`, `table`, prose or a semantic algebra operation on the same step. Introduce a figure with `statement: true`; the figure illustrates the exact statement in `tex` and the explanation in `why`.
+
+```ts
+{
+  title: 'Un tour pour θ, une période de 2π/3 pour x',
+  tex: String.raw`3\left(x+\frac{2\pi}{3}\right)=3x+2\pi`,
+  why: 'Quand x augmente de 2π/3, θ = 3x augmente de 2π.',
+  statement: true,
+  trig: {
+    kind: 'sine-triple',
+    fromAngle: Math.PI / 6,
+    angle: 5 * Math.PI / 6,
+    showSolutions: true,
+  },
+}
+```
+
+`angle` and optional `fromAngle` are values of the real variable on the horizontal axis, in radians. They are not screen coordinates. For `winding`, that variable is θ. For `sine-triple`, it is x: the circle uses θ = 3x and the graph represents sin(3x). The other exercise views use x on the line and on the circle.
+
+| `kind`              | Correspondence illustrated                                                           |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| `winding`           | θ → (cos θ ; sin θ), with both sine and cosine curves                                |
+| `sine-triple`       | sin(3x) = 1; one circle revolution for a horizontal displacement of 2π/3             |
+| `cosine-half`       | cos x = 1/2; a vertical line on the circle and a horizontal line on the graph        |
+| `sine-cosine`       | cos x = sin x; equal circle coordinates and intersections of the two curves          |
+| `cosine-inequality` | cos x < √3/2 within [0 ; 2π]; selected arc, curve portion and open solution interval |
+
+`showSolutions` reveals the equation's solution points or the inequality's open arc and interval. The equation-associated boundary values remain excluded from the strict inequality. Author exact solution sets and their justification independently of the graph.
+
+`fromAngle` specifies the start of a meaningful traversal. Forward navigation and replay animate that traversal using the existing speed control; backward navigation, direct jumps and reduced motion show the authored endpoint. `interactive: true` is reserved for a `winding` exploration step whose explanation remains valid for all slider values. It enables the angle slider and one-turn controls; do not attach it to a fixed-angle claim such as sin(π/6) = 1/2. The printable handout uses the authored endpoint and omits the controls.
+
+On the circle, cos θ is an abscissa and sin θ is an ordinate. On either function graph, θ is the abscissa and the function value is the ordinate. Distinguish those roles explicitly in the lesson, and say “enroulement de la droite réelle sur le cercle”: the domain of sine and cosine is still ℝ. A finite drawing window does not restrict that domain.
+
 ## Helper limits
 
 `expandBinomial(wrap, p, q)` generates `(x+p)(x+q)` only for safe positive integer `p`, negative integer `q`, and `p+q ≠ 0`. `wrap` must include its argument unchanged once. It writes distribution, then individual products, then collection. Other signs, cancellation to zero, or different variables should be authored explicitly or implemented with their own verified helper.

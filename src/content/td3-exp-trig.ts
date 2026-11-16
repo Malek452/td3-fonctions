@@ -547,10 +547,12 @@ export const expTrigExercises: Exercise[] = [
     short: 'Trigonométrie',
     theme: 'Cercle trigonométrique',
     level: 'Mathématiques 1',
-    minutes: 23,
-    description: 'Utiliser les valeurs remarquables et le cercle trigonométrique, puis écrire toutes les solutions par périodicité.',
+    minutes: 30,
+    description:
+      'Relier la droite réelle, le cercle trigonométrique et les courbes du sinus et du cosinus, puis écrire toutes les solutions par périodicité.',
     objectives: [
       'Interpréter le cosinus comme une abscisse et le sinus comme une ordonnée',
+      'Relier les points du cercle aux points des courbes représentatives',
       'Travailler en radians',
       'Écrire toutes les solutions réelles',
     ],
@@ -559,48 +561,96 @@ export const expTrigExercises: Exercise[] = [
     activities: [
       {
         id: 'td3-6-rappel',
-        label: 'Repères · Le cercle trigonométrique',
-        prompt: 'Relier un angle aux coordonnées du point associé.',
+        label: 'Repères · Droite, cercle et courbes',
+        prompt:
+          'Relier un réel, le point associé sur le cercle et les valeurs du sinus et du cosinus.',
         tex: t`M(\cos\theta\,;\,\sin\theta)`,
         result: t`\cos(\theta+2k\pi)=\cos\theta`,
         visual: 'trig',
         initialDomain: t`\mathbb R`,
         steps: [
           step(
-            'Les coordonnées d’un point du cercle',
-            t`M(\cos\theta\,;\,\sin\theta)`,
-            'Sur le cercle trigonométrique, le point associé à θ a pour abscisse cos θ et pour ordonnée sin θ. Les angles sont mesurés en radians.',
-            { phase: 'Repères', statement: true },
-          ),
-          step(
-            'Le cosinus est une abscisse',
-            t`\cos(\pi/3)=\frac12`,
-            'La projection orthogonale du point associé à π/3 sur l’axe des abscisses permet de lire cos(π/3) = 1/2.',
+            'De la droite réelle au cercle trigonométrique',
+            t`\theta\in\mathbb R\longmapsto M(\cos\theta\,;\,\sin\theta)`,
+            'À chaque réel θ, on associe un point du cercle de centre O et de rayon 1. Le point de départ est (1 ; 0). Il s’agit d’un enroulement de la droite réelle : le domaine de définition du sinus et du cosinus reste ℝ.',
             {
-              circle: { angle: Math.PI / 3, label: t`\cos(\pi/3)=\frac12`, axis: 'cos' },
+              phase: 'Enroulement de la droite réelle',
               statement: true,
+              trig: { kind: 'winding', angle: 0 },
             },
           ),
           step(
-            'Le sinus est une ordonnée',
+            'Une mesure positive : le sens trigonométrique',
+            t`\theta=\frac\pi3`,
+            'Depuis (1 ; 0), une mesure positive fait parcourir le cercle dans le sens inverse des aiguilles d’une montre. Sur un cercle de rayon 1, la longueur de l’arc parcouru est égale à la mesure positive de l’angle en radians : ici π/3.',
+            { statement: true, trig: { kind: 'winding', fromAngle: 0, angle: Math.PI / 3 } },
+          ),
+          step(
+            'Une mesure négative : le sens horaire',
+            t`\theta=-\frac\pi2`,
+            'Depuis (1 ; 0), une mesure négative fait parcourir le cercle dans le sens des aiguilles d’une montre. La longueur parcourue vaut π/2 ; le signe de la mesure indique le sens du parcours. Le point obtenu est (0 ; −1).',
+            { statement: true, trig: { kind: 'winding', fromAngle: 0, angle: -Math.PI / 2 } },
+          ),
+          step(
+            'Du cercle à la courbe du sinus',
             t`\sin(\pi/6)=\frac12`,
-            'La projection orthogonale du point associé à π/6 sur l’axe des ordonnées permet de lire sin(π/6) = 1/2.',
+            'Sur le cercle, sin θ est l’ordonnée de M. Sur la courbe représentative du sinus, le point a pour abscisse θ et pour ordonnée sin θ. Pour θ = π/6, on obtient donc le point de coordonnées (π/6 ; 1/2).',
             {
-              circle: { angle: Math.PI / 6, label: t`\sin(\pi/6)=\frac12`, axis: 'sin' },
+              phase: 'Deux représentations synchronisées',
+              trig: { kind: 'winding', fromAngle: 0, angle: Math.PI / 6 },
               statement: true,
             },
           ),
           step(
-            'Les valeurs remarquables utiles',
-            t`\sin(\pi/2)=1\qquad\cos(\pi/3)=\cos(-\pi/3)=\frac12`,
-            'Le sinus vaut 1 au point le plus haut du cercle. Les angles π/3 et −π/3 correspondent à deux points de même abscisse 1/2.',
-            { phase: 'Valeurs remarquables', statement: true },
+            'Du cercle à la courbe du cosinus',
+            t`\cos(\pi/3)=\frac12`,
+            'Sur le cercle, cos θ est l’abscisse de M. Sur la courbe représentative du cosinus, cette valeur devient une ordonnée : le point a pour coordonnées (θ ; cos θ). Il faut distinguer l’abscisse de M et l’abscisse θ sur la courbe.',
+            {
+              trig: { kind: 'winding', fromAngle: Math.PI / 6, angle: Math.PI / 3 },
+              statement: true,
+            },
           ),
           step(
-            'Un tour complet',
-            t`\theta\quad\text{et}\quad\theta+2k\pi\qquad(k\in\mathbb Z)`,
-            'Ajouter un nombre entier de tours ramène au même point. Pour une équation dans ℝ, on doit retrouver toutes ces possibilités.',
-            { phase: 'Périodicité', statement: true },
+            'Un maximum du sinus et un zéro du cosinus',
+            t`\sin(\pi/2)=1\qquad\cos(\pi/2)=0`,
+            'Au point le plus haut du cercle, l’ordonnée vaut 1 et l’abscisse vaut 0. À l’abscisse π/2, la courbe du sinus atteint son maximum 1 et celle du cosinus coupe l’axe des abscisses.',
+            {
+              phase: 'Valeurs remarquables',
+              statement: true,
+              trig: { kind: 'winding', fromAngle: Math.PI / 3, angle: Math.PI / 2 },
+            },
+          ),
+          step(
+            'Un zéro du sinus et un minimum du cosinus',
+            t`\sin\pi=0\qquad\cos\pi=-1`,
+            'Le point associé à π est (−1 ; 0). À l’abscisse π, la courbe du sinus coupe l’axe des abscisses et la courbe du cosinus atteint son minimum −1.',
+            { statement: true, trig: { kind: 'winding', fromAngle: Math.PI / 2, angle: Math.PI } },
+          ),
+          step(
+            'Ajouter un tour complet',
+            t`\frac{13\pi}{6}=\frac\pi6+2\pi`,
+            'Le curseur avance de 2π sur la droite réelle et sur l’axe des abscisses des courbes. Sur le cercle, le point effectue un tour complet et retrouve sa position de départ. Les deux valeurs du sinus sont égales ; celles du cosinus aussi.',
+            {
+              phase: 'Périodicité',
+              statement: true,
+              trig: { kind: 'winding', fromAngle: Math.PI / 6, angle: (13 * Math.PI) / 6 },
+            },
+          ),
+          step(
+            'La périodicité sur toute la droite réelle',
+            t`\sin(\theta+2k\pi)=\sin\theta\qquad\cos(\theta+2k\pi)=\cos\theta\quad(k\in\mathbb Z)`,
+            'Deux mesures qui diffèrent d’un multiple entier de 2π repèrent le même point du cercle. Les deux fonctions ont pour période 2π : leurs courbes se reproduisent par translation horizontale de 2π.',
+            { statement: true },
+          ),
+          step(
+            'Explorer les trois représentations',
+            t`M(\cos\theta\,;\,\sin\theta)\qquad\theta\in\mathbb R`,
+            'Déplacer le curseur permet de suivre le même réel sur la droite, le point M sur le cercle et les points des deux courbes. Ajouter ou retrancher 2π change le réel, mais pas le point du cercle ni les valeurs du sinus et du cosinus. La fenêtre affichée représente seulement une partie de ℝ.',
+            {
+              phase: 'Exploration',
+              statement: true,
+              trig: { kind: 'winding', angle: Math.PI / 6, interactive: true },
+            },
           ),
         ],
       },
@@ -626,11 +676,11 @@ export const expTrigExercises: Exercise[] = [
             { phase: 'Lecture du cercle', statement: true },
           ),
           step(
-            'Le point le plus haut du cercle',
+            'Le sommet du cercle et le maximum de la courbe',
             t`\sin(\pi/2)=1`,
-            'Sur le cercle trigonométrique, seul le point de coordonnées (0 ; 1), associé à π/2, a pour ordonnée 1.',
+            'Sur le cercle, l’angle est θ = 3x : seul le point (0 ; 1) a pour ordonnée 1. Pour θ = π/2, on a x = π/6. Sur la courbe de x ↦ sin(3x), c’est donc le point (π/6 ; 1), et non le point d’abscisse π/2.',
             {
-              circle: { angle: Math.PI / 2, label: t`\sin(\pi/2)=1`, axis: 'sin' },
+              trig: { kind: 'sine-triple', fromAngle: 0, angle: Math.PI / 6 },
               statement: true,
             },
           ),
@@ -717,6 +767,21 @@ export const expTrigExercises: Exercise[] = [
             },
           ),
           step(
+            'Un tour pour θ, une période de 2π/3 pour x',
+            t`3\left(x+\frac{2\pi}{3}\right)=3x+2\pi`,
+            'Quand x augmente de 2π/3, l’angle θ = 3x augmente de 2π. Le point du cercle effectue un tour et la courbe retrouve la même ordonnée. Les intersections avec la droite y = 1 sont espacées de 2π/3.',
+            {
+              phase: 'Lecture des deux vues',
+              statement: true,
+              trig: {
+                kind: 'sine-triple',
+                fromAngle: Math.PI / 6,
+                angle: (5 * Math.PI) / 6,
+                showSolutions: true,
+              },
+            },
+          ),
+          step(
             'L’angle obtenu par substitution',
             t`3\left(\frac\pi6+\frac{2k\pi}3\right)=\frac\pi2+2k\pi`,
             'Pour tout entier k, multiplier la valeur proposée de x par 3 donne l’angle π/2, à un nombre entier de tours près.',
@@ -732,7 +797,11 @@ export const expTrigExercises: Exercise[] = [
             'L’ensemble des solutions',
             t`S=\left\{\frac\pi6+\frac{2k\pi}3\;:\;k\in\mathbb Z\right\}`,
             'L’entier relatif k parcourt ℤ. Deux solutions successives diffèrent de 2π/3.',
-            { phase: 'Conclusion', statement: true },
+            {
+              phase: 'Conclusion',
+              statement: true,
+              trig: { kind: 'sine-triple', angle: Math.PI / 6, showSolutions: true },
+            },
           ),
         ],
       },
@@ -807,27 +876,30 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Le premier angle remarquable',
             t`\cos(\pi/3)=\frac12`,
-            'Le point du cercle trigonométrique associé à π/3 a pour abscisse 1/2.',
+            'Le point du cercle associé à π/3 a pour abscisse 1/2. Sur la courbe du cosinus, le point d’abscisse π/3 a donc pour ordonnée 1/2.',
             {
-              phase: 'Lecture du cercle',
-              circle: { angle: Math.PI / 3, label: t`\cos(\pi/3)=\frac12`, axis: 'cos' },
+              phase: 'Lecture du cercle et de la courbe',
+              trig: { kind: 'cosine-half', fromAngle: 0, angle: Math.PI / 3 },
               statement: true,
             },
           ),
           step(
             'L’angle symétrique',
             t`\cos(-\pi/3)=\frac12`,
-            'La symétrie par rapport à l’axe des abscisses conserve l’abscisse. Le point associé à −π/3 a donc lui aussi pour abscisse 1/2.',
+            'La symétrie par rapport à l’axe des abscisses conserve l’abscisse sur le cercle. Aux abscisses −π/3 et π/3, les points de la courbe du cosinus ont donc la même ordonnée 1/2.',
             {
-              circle: { angle: -Math.PI / 3, label: t`\cos(-\pi/3)=\frac12`, axis: 'cos' },
+              trig: { kind: 'cosine-half', fromAngle: Math.PI / 3, angle: -Math.PI / 3 },
               statement: true,
             },
           ),
           step(
-            'Les deux points d’intersection',
+            'Les intersections dans les deux représentations',
             t`\cos x=\frac12`,
-            'La droite verticale d’abscisse 1/2 coupe le cercle en exactement deux points, associés à π/3 et −π/3. Toute solution correspond à l’un de ces deux points.',
-            { statement: true, graph: 'cosine-equation' },
+            'Sur le cercle, la droite verticale d’abscisse 1/2 coupe le cercle en deux points. Sur le graphique, la droite horizontale d’ordonnée 1/2 coupe la courbe aux abscisses solutions. Il y a deux solutions par période de 2π.',
+            {
+              statement: true,
+              trig: { kind: 'cosine-half', angle: Math.PI / 3, showSolutions: true },
+            },
           ),
           step(
             'Toutes les solutions par périodicité',
@@ -849,8 +921,17 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’ensemble des solutions',
             t`S=\left\{\pm\frac\pi3+2k\pi\;:\;k\in\mathbb Z\right\}`,
-            'Le signe ± représente deux familles, une avec +π/3 et une avec −π/3.',
-            { phase: 'Conclusion', statement: true },
+            'Le signe ± représente deux familles, une avec +π/3 et une avec −π/3. Sur la droite réelle, les repères sont les abscisses des intersections de la courbe avec y = 1/2 ; la périodicité prolonge ces familles dans les deux sens.',
+            {
+              phase: 'Conclusion',
+              statement: true,
+              trig: {
+                kind: 'cosine-half',
+                fromAngle: Math.PI / 3,
+                angle: (7 * Math.PI) / 3,
+                showSolutions: true,
+              },
+            },
           ),
         ],
       },
@@ -872,28 +953,28 @@ export const expTrigExercises: Exercise[] = [
           step(
             'L’interprétation géométrique',
             t`M(\cos x\,;\,\sin x)\quad\text{avec}\quad y_M=x_M`,
-            'Dans le repère du cercle, l’égalité de l’abscisse et de l’ordonnée caractérise la droite y = x. Elle passe par le centre et coupe le cercle en deux points diamétralement opposés.',
-            { phase: 'Lecture du cercle', statement: true, graph: 'sine-cosine-equation' },
+            'Dans le repère du cercle, l’égalité de l’abscisse et de l’ordonnée caractérise la droite y = x, qui coupe le cercle en deux points opposés. Dans le repère des courbes, on cherche les intersections des courbes du sinus et du cosinus.',
+            {
+              phase: 'Lecture du cercle et des courbes',
+              statement: true,
+              trig: { kind: 'sine-cosine', angle: Math.PI / 4, showSolutions: true },
+            },
           ),
           step(
             'Le premier point d’intersection',
             t`\cos(\pi/4)=\sin(\pi/4)=\frac{\sqrt2}{2}`,
             'Dans le premier quadrant, l’angle de mesure π/4 est la moitié d’un angle droit. L’abscisse et l’ordonnée valent toutes deux √2/2.',
             {
-              circle: { angle: Math.PI / 4, label: t`\cos(\pi/4)=\sin(\pi/4)`, axis: 'cos' },
+              trig: { kind: 'sine-cosine', fromAngle: 0, angle: Math.PI / 4 },
               statement: true,
             },
           ),
           step(
             'Le point opposé',
             t`\cos(5\pi/4)=\sin(5\pi/4)=-\frac{\sqrt2}{2}`,
-            'En ajoutant π, les deux coordonnées changent de signe ensemble. Elles restent égales.',
+            'En ajoutant π, les deux coordonnées changent de signe ensemble. Elles restent égales. Sur les courbes, l’intersection d’abscisse 5π/4 a pour ordonnée −√2/2.',
             {
-              circle: {
-                angle: (5 * Math.PI) / 4,
-                label: t`\cos(5\pi/4)=\sin(5\pi/4)`,
-                axis: 'sin',
-              },
+              trig: { kind: 'sine-cosine', fromAngle: Math.PI / 4, angle: (5 * Math.PI) / 4 },
               statement: true,
             },
           ),
@@ -911,8 +992,12 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Conclusion de la résolution géométrique',
             t`S=\left\{\frac\pi4+k\pi\;:\;k\in\mathbb Z\right\}`,
-            'Les deux points d’intersection donnent toutes les solutions : π/4 à un nombre entier de demi-tours près. La résolution par le cercle trigonométrique est complète.',
-            { phase: 'Conclusion', statement: true },
+            'Les deux points du cercle donnent toutes les solutions : π/4 à un nombre entier de demi-tours près. Les abscisses des intersections des deux courbes sont ainsi espacées de π. Cela ne signifie pas que le sinus ou le cosinus a pour période π.',
+            {
+              phase: 'Conclusion',
+              statement: true,
+              trig: { kind: 'sine-cosine', angle: (5 * Math.PI) / 4, showSolutions: true },
+            },
           ),
           textStep(
             'Complément facultatif : la tangente',
@@ -989,12 +1074,13 @@ export const expTrigExercises: Exercise[] = [
     short: 'Inéquation cos',
     theme: 'Cercle trigonométrique',
     level: 'Mathématiques 1',
-    minutes: 12,
+    minutes: 15,
     description:
-      'Résoudre l’équation associée, puis repérer les points du cercle dont l’abscisse satisfait l’inégalité stricte.',
+      'Résoudre l’équation associée, puis relier l’arc du cercle, la portion de courbe et l’intervalle qui satisfont l’inégalité stricte.',
     objectives: [
       'Interpréter cos x comme une abscisse',
       'Repérer l’arc correspondant aux solutions',
+      'Lire les mêmes solutions sur la courbe du cosinus et sur la droite réelle',
       'Déterminer si les bornes appartiennent à l’ensemble des solutions',
     ],
     prerequisites: ['Angles remarquables', 'Cercle trigonométrique', 'Intervalles'],
@@ -1016,10 +1102,14 @@ export const expTrigExercises: Exercise[] = [
             { phase: 'Énoncé', statement: true },
           ),
           step(
-            'La coordonnée à comparer',
+            'La même comparaison dans les deux vues',
             t`x_M=\cos x<\frac{\sqrt3}{2}`,
-            'Le point M associé à x a pour abscisse cos x. On cherche les points strictement à gauche de la droite verticale d’abscisse √3/2.',
-            { phase: 'Lecture géométrique', statement: true },
+            'Sur le cercle, cos x est l’abscisse de M : on cherche les points strictement à gauche de la droite verticale d’abscisse √3/2. Sur la courbe, cos x est une ordonnée : on cherche les points strictement au-dessous de la droite horizontale y = √3/2.',
+            {
+              phase: 'Lecture géométrique',
+              statement: true,
+              trig: { kind: 'cosine-inequality', angle: 0 },
+            },
           ),
           step(
             'L’équation associée',
@@ -1030,21 +1120,21 @@ export const expTrigExercises: Exercise[] = [
           step(
             'La première solution de l’équation associée',
             t`\cos(\pi/6)=\frac{\sqrt3}{2}`,
-            'L’angle remarquable π/6 donne le point situé dans le premier quadrant.',
+            'L’angle remarquable π/6 donne le point situé dans le premier quadrant du cercle. Sur la courbe du cosinus, c’est l’abscisse de la première intersection avec la droite y = √3/2 dans [0 ; 2π].',
             {
-              circle: { angle: Math.PI / 6, label: t`\cos(\pi/6)=\frac{\sqrt3}{2}`, axis: 'cos' },
+              trig: { kind: 'cosine-inequality', fromAngle: 0, angle: Math.PI / 6 },
               statement: true,
             },
           ),
           step(
             'La seconde solution de l’équation associée',
             t`\cos(11\pi/6)=\frac{\sqrt3}{2}`,
-            'Le point symétrique par rapport à l’axe des abscisses est associé à 2π − π/6 = 11π/6.',
+            'Le point symétrique sur le cercle est associé à 2π − π/6 = 11π/6. La seconde intersection de la courbe avec y = √3/2 a cette abscisse. On a ainsi repéré les deux bornes à examiner.',
             {
-              circle: {
+              trig: {
+                kind: 'cosine-inequality',
+                fromAngle: Math.PI / 6,
                 angle: (11 * Math.PI) / 6,
-                label: t`\cos(11\pi/6)=\frac{\sqrt3}{2}`,
-                axis: 'cos',
               },
               statement: true,
             },
@@ -1052,10 +1142,15 @@ export const expTrigExercises: Exercise[] = [
           step(
             'Un point de l’arc à conserver',
             t`\cos\pi=-1<\frac{\sqrt3}{2}`,
-            'Le point associé à π a pour abscisse −1 < √3/2. Il appartient au grand arc délimité par les deux points trouvés.',
+            'Le point associé à π a pour abscisse −1 < √3/2. Sur la courbe, le point d’abscisse π est au-dessous de la droite y = √3/2. Il permet d’identifier le grand arc du cercle à conserver et la portion de courbe correspondante.',
             {
               phase: 'Choix de l’arc',
-              circle: { angle: Math.PI, label: t`\cos\pi=-1`, axis: 'cos' },
+              trig: {
+                kind: 'cosine-inequality',
+                fromAngle: Math.PI / 6,
+                angle: Math.PI,
+                showSolutions: true,
+              },
               statement: true,
             },
           ),
@@ -1066,28 +1161,53 @@ export const expTrigExercises: Exercise[] = [
             { phase: 'Lecture des abscisses', statement: true, graph: 'cosine-abscissas' },
           ),
           step(
-            'L’arc correspondant aux solutions',
+            'De l’arc à la courbe, puis à l’intervalle',
             t`\frac\pi6<x<\frac{11\pi}6`,
-            'On relève sur le cercle tous les points dont l’abscisse appartient au segment bleu. Ils forment l’arc parcouru de π/6 à 11π/6 dans le sens trigonométrique, avec ses deux extrémités exclues.',
-            { phase: 'Lecture de l’arc', statement: true, graph: 'cosine-inequality' },
+            'Le grand arc privé de ses extrémités correspond aux points de la courbe situés strictement sous y = √3/2. Leurs abscisses forment l’intervalle ouvert ]π/6 ; 11π/6[. Le report sur la droite réelle donne les mêmes solutions.',
+            {
+              phase: 'Lecture des solutions',
+              statement: true,
+              trig: {
+                kind: 'cosine-inequality',
+                fromAngle: Math.PI / 6,
+                angle: (11 * Math.PI) / 6,
+                showSolutions: true,
+              },
+            },
           ),
           step(
             'Les deux bornes sont exclues',
             t`x\ne\frac\pi6\qquad x\ne\frac{11\pi}6`,
             'Pour x = π/6 et x = 11π/6, le cosinus vaut √3/2. L’inégalité stricte exclut ces deux valeurs.',
-            { phase: 'Bornes', statement: true },
+            {
+              phase: 'Bornes',
+              statement: true,
+              trig: { kind: 'cosine-inequality', angle: Math.PI / 6, showSolutions: true },
+            },
           ),
           step(
             'Les extrémités du tour ne conviennent pas',
             t`\cos0=\cos(2\pi)=1>\frac{\sqrt3}{2}`,
             'Même si 0 et 2π appartiennent à l’intervalle de recherche, ils ne vérifient pas l’inéquation.',
-            { statement: true },
+            {
+              statement: true,
+              trig: {
+                kind: 'cosine-inequality',
+                fromAngle: 0,
+                angle: 2 * Math.PI,
+                showSolutions: true,
+              },
+            },
           ),
           step(
             'L’ensemble des solutions',
             t`S=]\frac\pi6\,;\,\frac{11\pi}6[`,
             'L’intervalle est ouvert aux deux bornes. Il est entièrement contenu dans [0 ; 2π], comme l’exige l’énoncé.',
-            { phase: 'Conclusion', statement: true },
+            {
+              phase: 'Conclusion',
+              statement: true,
+              trig: { kind: 'cosine-inequality', angle: Math.PI, showSolutions: true },
+            },
           ),
         ],
       },

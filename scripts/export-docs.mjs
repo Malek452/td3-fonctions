@@ -61,7 +61,10 @@ for (const section of exercises) {
   }
   body += '</section>';
 }
-const surfaceStyles = await readFile('src/styles.css', 'utf8');
+const surfaceStyles =
+  (await readFile('src/styles.css', 'utf8')) +
+  '\n' +
+  (await readFile('src/components/trig-slide.css', 'utf8'));
 const html = `<!doctype html><html lang="${escape(presentation.locale)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(presentation.title)}</title><link rel="stylesheet" href="assets/katex.min.css"><style>${surfaceStyles}
 body{font:17px/1.65 system-ui,sans-serif;color:#14263d;background:#fffefa;margin:0}main{max-width:940px;margin:auto;padding:30px}article{border-top:1px solid #8b99aa;margin:35px 0}.step{margin:26px 0;break-inside:avoid}.formula{overflow:auto}h1,h2{font-family:Georgia,serif}.result{border-top:1px solid #8b99aa;padding:15px}aside{padding:12px;background:#edf1f5}.graph-slide{max-width:760px}.graph-slide svg{max-height:360px}.sign-table{font-size:21px}.sign-table-scroll{padding:8px 0}.step:has(.graph-slide),.step:has(.sign-table){break-inside:avoid}@media print{.graph-slide svg{max-height:310px}.sign-table-scroll{overflow:visible}.sign-table{font-size:18px}body{background:white}main{padding:0}section+section{break-before:page}.formula{overflow:visible}}</style></head><body><main>${body}</main></body></html>`;
 await mkdir('public/handout/assets', { recursive: true });

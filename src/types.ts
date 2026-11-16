@@ -24,6 +24,17 @@ export interface SignTableFrame {
   selectedIntervals?: number[];
   selectedPoints?: number[];
 }
+/** One real parameter drives the circle, curves and solution line together. */
+export interface TrigFrame {
+  kind: 'winding' | 'sine-triple' | 'cosine-half' | 'sine-cosine' | 'cosine-inequality';
+  /** Real x, or θ for winding. The sine-triple circle uses θ = 3x. */
+  angle: number;
+  /** Starting parameter when advancing or replaying this frame. */
+  fromAngle?: number;
+  showSolutions?: boolean;
+  /** Free exploration is reserved for the introductory winding scene. */
+  interactive?: boolean;
+}
 export interface Step {
   title: string;
   tex: string;
@@ -88,7 +99,15 @@ export interface Step {
   statement?: boolean;
   table?: SignTableFrame;
   /** Exact reference curves and a dedicated trigonometric inequality figure. */
-  graph?: 'log' | 'exp' | 'cosine-equation' | 'sine-cosine-equation' | 'cosine-abscissas' | 'cosine-inequality';
+  graph?:
+    | 'log'
+    | 'exp'
+    | 'cosine-equation'
+    | 'sine-cosine-equation'
+    | 'cosine-abscissas'
+    | 'cosine-inequality';
+  /** Synchronized circle, function curves and real parameter axis. */
+  trig?: TrigFrame;
   /** Optional diagram only on the step where it is explained. */
   diagram?: 'fold';
   circle?: { angle: number; label: string; axis: 'sin' | 'cos' };

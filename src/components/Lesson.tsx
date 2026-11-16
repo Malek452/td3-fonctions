@@ -119,6 +119,7 @@ export function Lesson({ activity, reduced }: { activity: Activity; reduced: boo
           speed={speed}
           pauseSignal={pauseSignal}
           onAvailable={setSceneAvailable}
+          onInteract={() => setPlaying(false)}
         />
         <div className="reading-explanation" aria-live="polite">
           <p>{current.why}</p>

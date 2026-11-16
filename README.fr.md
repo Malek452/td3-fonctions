@@ -12,6 +12,12 @@ Le cours joint « Chapitre 3 – Limites et continuité » inspire les repères 
 
 Les exercices 4 à 7 suivent les démarches du corrigé fourni : changement de variable et discriminant, étude du signe du quotient, puis résolution sur le cercle trigonométrique. La méthode par la tangente est signalée comme un complément facultatif hors programme. Les figures relient les abscisses, les points du cercle et les familles de solutions.
 
+## Droite réelle, cercle et courbes
+
+Le rappel de trigonométrie relie l’enroulement de la droite réelle sur le cercle unité aux courbes du sinus et du cosinus. Les parcours dans les deux sens, les projections, les valeurs remarquables et un tour complet montrent comment un même réel est représenté dans chaque vue. Le domaine de définition des deux fonctions reste ℝ. Une étape d’exploration permet de déplacer l’angle et d’ajouter ou de retrancher un tour.
+
+Les exercices 6a, 6b, 6c et 7 utilisent ces vues synchronisées pendant la résolution : maximum de sin(3x), intersections de cos(x) avec 1/2, intersections des courbes du sinus et du cosinus, puis arc et intervalle de l’inéquation stricte. Pour sin(3x), le cercle représente l’angle θ = 3x tandis que la courbe est graduée en x ; un tour du cercle correspond ainsi à un déplacement de 2π/3 sur l’axe des abscisses. Les bornes exclues sont indiquées par des cercles vides. Les mêmes figures sont reprises sans commandes dans le corrigé imprimable.
+
 ## Animations des opérations
 
 Les transformations présentent leurs rôles mathématiques : le facteur se distribue sur chaque terme ; une addition, une soustraction, une multiplication ou une division s'applique aux deux membres ; la réduction de termes semblables montre le calcul des coefficients. Les simplifications ciblent une sous-expression et indiquent leur justification. Les conditions de division et le changement de sens d'une inégalité sont explicités.
@@ -24,6 +30,7 @@ Le vocabulaire distingue les conditions d'existence, l'injectivité, la stricte 
 - Avancer avec « Étape suivante », les flèches du clavier ou un glissement horizontal sur téléphone.
 - Le menu des étapes permet d'aller directement à l'étude du domaine de définition, à un calcul ou à une conclusion.
 - Utiliser le ralenti, le rejeu ou la réduction des animations selon les besoins.
+- Dans « Repères · Droite, cercle et courbes », l’étape « Explorer les trois représentations » propose le curseur d’angle et les commandes de tour complet. Les autres figures suivent les étapes de résolution.
 - Le bouton plein écran facilite la projection. Le fond clair, les traits épais et les accents sombres améliorent la lecture.
 - Le corrigé imprimable est accessible à `handout/`. L'impression du navigateur permet de l'enregistrer en PDF.
 
