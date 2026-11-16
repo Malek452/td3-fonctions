@@ -6,6 +6,7 @@ import { highlightedTex } from './focus';
 import { SignTable } from './SignTable';
 import { ProseSlide } from './ProseSlide';
 import { GraphSlide } from './GraphSlide';
+import { TrigSlide } from './TrigSlide';
 import { ui } from '../ui';
 declare const __MOTION_PLAYER_URL__: string;
 export function Animation({
@@ -17,6 +18,7 @@ export function Animation({
   speed,
   pauseSignal,
   onAvailable,
+  onInteract,
 }: {
   activity: Activity;
   step: number;
@@ -26,6 +28,7 @@ export function Animation({
   speed: number;
   pauseSignal: number;
   onAvailable: (available: boolean) => void;
+  onInteract?: () => void;
 }) {
   const host = useRef<HTMLDivElement>(null),
     controller = useRef<Controller | null>(null),
@@ -38,15 +41,16 @@ export function Animation({
   const table = activity.steps[step].table;
   const prose = activity.steps[step].prose;
   const graph = activity.steps[step].graph;
+  const trig = activity.steps[step].trig;
   const circle = activity.steps[step].circle;
   const staticCircle = !!circle && (reduced || state !== 'ready');
   useEffect(() => {
-    onAvailable(!!table || !!prose || !!graph || reduced || state !== 'loading');
-  }, [table, prose, graph, reduced, state, onAvailable]);
+    onAvailable(!!table || !!prose || !!graph || !!trig || reduced || state !== 'loading');
+  }, [table, prose, graph, trig, reduced, state, onAvailable]);
   useEffect(() => {
     let cancelled = false;
     setState('loading');
-    if (reduced || activity.steps.every((s) => s.prose || s.graph)) return;
+    if (reduced || activity.steps.every((s) => s.prose || s.graph || s.trig)) return;
     const playerUrl =
       typeof __MOTION_PLAYER_URL__ === 'string' ? __MOTION_PLAYER_URL__ : 'animations/player.js';
     const url = new URL(playerUrl, document.baseURI).href;
@@ -82,28 +86,46 @@ export function Animation({
     controller.current?.pause();
   }, [pauseSignal]);
   useEffect(() => {
-    pendingReplay.current = animate && replay > 0 && !reduced && !table && !prose && !graph;
-    if (table || prose || graph) controller.current?.pause();
+    pendingReplay.current =
+      animate && replay > 0 && !reduced && !table && !prose && !graph && !trig;
+    if (table || prose || graph || trig) controller.current?.pause();
     else if (pendingReplay.current) controller.current?.replay(step, liveSpeed.current);
     else controller.current?.seek(step);
-  }, [step, replay, animate, reduced, table, prose, graph]);
+  }, [step, replay, animate, reduced, table, prose, graph, trig]);
   useEffect(() => {
     controller.current?.setSpeed(speed);
   }, [speed]);
   return (
     <div
-      className={'animation' + (table ? ' has-table' : graph || staticCircle ? ' has-graph' : '')}
+      className={
+        'animation' +
+        (table ? ' has-table' : trig ? ' has-trig' : graph || staticCircle ? ' has-graph' : '')
+      }
       aria-label={ui.visual}
       data-playback={animate && !reduced ? 'animate' : 'settled'}
     >
       {!reduced && (
         <div
-          hidden={!!table || !!prose || !!graph || staticCircle}
+          hidden={!!table || !!prose || !!graph || !!trig || staticCircle}
           ref={host}
           className={'canvas-host ' + (state === 'ready' ? 'is-ready' : '')}
         />
       )}
-      {(graph || staticCircle) && <GraphSlide graph={graph} circle={circle} tex={activity.steps[step].tex} />}
+      {(graph || staticCircle) && (
+        <GraphSlide graph={graph} circle={circle} tex={activity.steps[step].tex} />
+      )}
+      {trig && (
+        <TrigSlide
+          key={`${step}-${replay}`}
+          frame={trig}
+          tex={activity.steps[step].tex}
+          reduced={reduced}
+          animate={animate}
+          speed={speed}
+          pauseSignal={pauseSignal}
+          onInteract={onInteract}
+        />
+      )}
       {prose && (
         <ProseSlide
           key={`${step}-${replay}`}
@@ -122,13 +144,13 @@ export function Animation({
           pauseSignal={pauseSignal}
         />
       )}
-      {!table && !prose && !graph && !staticCircle && (reduced || state !== 'ready') && (
+      {!table && !prose && !graph && !trig && !staticCircle && (reduced || state !== 'ready') && (
         <div className="animation-fallback">
           <MathView display tex={highlightedTex(activity.steps[step])} />
           <p>{state === 'error' ? ui.animationError : reduced ? '' : ui.loading}</p>
         </div>
       )}
-      {!table && !prose && !graph && state === 'ready' && !reduced && (
+      {!table && !prose && !graph && !trig && state === 'ready' && !reduced && (
         <div className="sr-only">
           <MathView display tex={activity.steps[step].tex} />
         </div>

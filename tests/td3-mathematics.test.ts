@@ -239,7 +239,20 @@ it('exercise 6 solutions and circle angles satisfy the equations over repeated p
     close(Math.cos(step.circle!.angle), Math.sin(step.circle!.angle));
   for (const step of b.steps.filter((item) => item.circle))
     close(Math.cos(step.circle!.angle), 0.5);
-  const angles = b.steps.flatMap((step) => (step.circle ? [step.circle.angle] : []));
+  const aFrames = a.steps.flatMap((step) => (step.trig?.kind === 'sine-triple' ? [step.trig] : []));
+  const bFrames = b.steps.flatMap((step) => (step.trig?.kind === 'cosine-half' ? [step.trig] : []));
+  const cFrames = c.steps.flatMap((step) => (step.trig?.kind === 'sine-cosine' ? [step.trig] : []));
+  assert.ok(
+    aFrames.length && bFrames.length && cFrames.length,
+    'Every equation must have synchronized views',
+  );
+  for (const frame of aFrames) close(Math.sin(3 * frame.angle), 1, '6a: frame.angle is x, not 3x');
+  for (const frame of bFrames) close(4 * Math.cos(frame.angle) + 1, 3, '6b: original equation');
+  for (const frame of cFrames)
+    close(Math.cos(frame.angle), Math.sin(frame.angle), '6c: original equation');
+  const angles = b.steps.flatMap((step) =>
+    step.circle ? [step.circle.angle] : step.trig?.kind === 'cosine-half' ? [step.trig.angle] : [],
+  );
   assert.ok(angles.some((angle) => Math.sin(angle) > 0));
   assert.ok(angles.some((angle) => Math.sin(angle) < 0));
 });
@@ -266,7 +279,12 @@ it('exercise 7 selects the large arc and excludes both equality endpoints', () =
 it('the new circle diagrams place both solutions on the circle and the required line', () => {
   for (const graph of ['cosine-equation', 'sine-cosine-equation'] as const) {
     const host = document.createElement('div');
-    host.innerHTML = renderPrintSurface({ graph, title: 'Figure', tex: 'x', why: 'Lecture géométrique' });
+    host.innerHTML = renderPrintSurface({
+      graph,
+      title: 'Figure',
+      tex: 'x',
+      why: 'Lecture géométrique',
+    });
     const circle = host.querySelector('circle:not(.solution-point)')!;
     const cx = Number(circle.getAttribute('cx'));
     const cy = Number(circle.getAttribute('cy'));

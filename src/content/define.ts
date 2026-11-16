@@ -42,9 +42,14 @@ export function definePresentation(sections: Exercise[]): Exercise[] {
           step.simplify,
         ].filter(Boolean);
         if (transforms.length > 1) fail(at + ': only one semantic operation per step.');
-        const surfaces = [step.table, step.circle, step.diagram, step.prose, step.graph].filter(
-          Boolean,
-        );
+        const surfaces = [
+          step.table,
+          step.circle,
+          step.diagram,
+          step.prose,
+          step.graph,
+          step.trig,
+        ].filter(Boolean);
         if (surfaces.length > 1 || (surfaces.length && transforms.length))
           fail(at + ': only one presentation surface/operation per step.');
         if (i === 0 && (transforms.length || step.fromFocus))
@@ -77,6 +82,22 @@ export function definePresentation(sections: Exercise[]): Exercise[] {
           fail(at + ': simplification needs a source, result and explicit rule.');
         if (step.prose && (!step.prose.length || step.prose.some((p) => !p.trim())))
           fail(at + ': prose needs nonempty paragraphs.');
+        if (step.trig) {
+          const frame = step.trig;
+          if (
+            !['winding', 'sine-triple', 'cosine-half', 'sine-cosine', 'cosine-inequality'].includes(
+              frame.kind,
+            )
+          )
+            fail(at + ': unknown trigonometric scene.');
+          if (
+            !Number.isFinite(frame.angle) ||
+            (frame.fromAngle !== undefined && !Number.isFinite(frame.fromAngle))
+          )
+            fail(at + ': trigonometric angles must be finite real numbers.');
+          if (frame.interactive && frame.kind !== 'winding')
+            fail(at + ': free exploration belongs to the winding introduction.');
+        }
         for (const n of [step.focusOccurrence, step.fromFocusOccurrence])
           if (n !== undefined && (!Number.isInteger(n) || n < 1))
             fail(at + ': occurrences are one-based positive integers.');
